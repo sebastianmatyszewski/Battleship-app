@@ -1,0 +1,105 @@
+
+<div class="container" *ngIf="!gameStarted">
+    <div class="row">
+		
+		<div  cdkDropList #cdkBoard=cdkDropList [cdkDropListData]="shipsInBoard" [cdkDropListConnectedTo]="[cdkShips]"
+			style="position:relative" (cdkDropListDropped)="drop($event)" cdkDropListSortingDisabled="true" >
+			<ng-container *ngFor="let ship of shipsInBoard">
+				
+				
+				<!-- [cdkDragDisabled]="item.disabled"> -->
+				<!-- <div  style="position:absolute"  [style.top]="ship.top+'px'" [style.left]="ship.left+'px'" cdkDrag (cdkDragStarted)="onDragStarted($event)" > -->
+					<div  style="position:absolute"  [style.top]="ship.top+'px'" [style.left]="ship.left+'px'" cdkDrag [cdkDragDisabled]="ship.disabled">
+					<!-- <app-ship (mouseover)="shipId=id" [name]="ship.name" [size]="ship.mastCount"></app-ship> -->
+					<div 
+					[class.ship-box-set-horizontally] = "ship.orientation === 'horizontally'"
+					[class.ship-box-set-vertically] = "ship.orientation === 'vertically'"
+
+					>
+						<div  [class.ship-drop-wrapper-set-horizontally] = "ship.orientation === 'horizontally'"
+						[class.ship-drop-wrapper-set-vertically] = "ship.orientation === 'vertically'"
+						[style.width]="ship.orientation === 'horizontally' ? (40*size)+'px' : 40+'px'" 
+						[style.height]="ship.orientation === 'horizontally' ? 40+'px' : (40*size)+'px'">
+						<!-- <div [class.ship-drop-wrapper-set-horizontally] = "shipOrientation === 'horizontally'"
+						[class.ship-drop-wrapper-set-vertically] = "shipOrientation === 'vertically'"> -->
+							<div id="i" *ngFor="let i of [0,1,2,3,4].slice(0,ship.mastCount)" (click)="ship.positionOnArray = shipPositionOnArray" (mousedown)="shipPartId=i"
+								class="ship-box-cell-set" (mousedown)="shipId=ship.id" >
+								{{ship.id}}
+							</div>
+						</div>
+						
+					</div><div class="tutaj" *cdkDragPlaceholder></div>
+				</div>
+			</ng-container>
+			<div class="grid grid-user">
+				<div class="grid" *ngFor="let number of array(100), let i = index" id='columns' #bt mat-button class="bt-cell" (mouseover)="shipPositionOnArray = i"  (mouseover)="position=bt.getBoundingClientRect()">
+					<!-- <button ></button> -->{{i}}
+				</div>
+			</div>
+			<button *ngIf="allShipPlaced" type="button" class="btn btn-success" (click)="gameStarted = true">Rozpocznij grę!</button>
+			
+			<button *ngIf="!allShipPlaced" type="button" class="btn btn-secondary" disabled data-toggle="tooltip" data-placement="bottom" title="Rozmieść wszystkie statki na planszy!">
+				Rozpocznij grę!
+			  </button>
+		</div>
+		
+			
+		<!-- <button (click)="shipOrientation='vertically'"> v pionowo</button> -->
+		<hr />
+		<div class="row">
+		<div  class='container1'>
+			<div class="ships">
+				<h2>Available ships</h2>
+				<div
+				
+				[class.ship-box-flex-horizontally] = "shipOrientation === 'horizontally'"
+				[class.ship-box-flex-set-vertically] = "shipOrientation === 'vertically'"
+
+				cdkDropList #cdkShips=cdkDropList [cdkDropListData]="ships" class="ship-list"
+					[cdkDropListConnectedTo]="[cdkBoard]"  (cdkDropListDropped)="drop($event)" cdkDropListSortingDisabled="true">
+				
+					<ng-container *ngFor="let ship of ships">
+						<div cdkDrag (cdkDragStarted)="onDragStarted($event)"
+						
+						[style.width]="ship.orientation === 'horizontally' ? (40*ship.mastCount)+(2*ship.mastCount+2)+'px' : 40+'px'" 
+						[style.height]="ship.orientation === 'horizontally' ? 40+'px' : (40*ship.mastCount)+'px'"
+						
+						cdkDrag  [style.size]="40*ship.mastCount+'px'">
+
+							<!-- <app-ship [name]="ship.name" [size]="ship.mastCount"></app-ship> -->
+							<div
+								[class.ship-box-set-horizontally] = "shipOrientation === 'horizontally'"
+								[class.ship-box-set-set-vertically] = "shipOrientation === 'vertically'"
+								
+								>
+								
+								<div 
+								[class.ship-drop-wrapper-set-horizontally] = "shipOrientation === 'horizontally'"
+								[class.ship-drop-wrapper-set-vertically] = "shipOrientation === 'vertically'"
+								>
+								
+									<div *ngFor="let i of [0,1,2,3,4].slice(0,ship.mastCount)" (mousedown)="shipId=ship.id"  (mousedown)="shipPartId=i" (mousedown)="ship.orientation=shipOrientation" (mousedown)="ClickShipOrientation=ship.orientation"
+										class="ship-box-cell-set"  (mouseover)="index=i">
+										{{ship.id}}
+									</div>
+								</div>
+								<div *cdkDragPlaceholder></div>
+							</div>
+							<div *cdkDragPlaceholder></div>
+						</div>
+						
+					</ng-container>
+					
+				</div>
+				<button type="button" class="btn btn-secondary" (click)="changeOrientation()" >{{shipOrientation}}</button>
+
+			</div>
+		</div>
+	</div>
+    </div>
+</div>
+
+
+
+
+

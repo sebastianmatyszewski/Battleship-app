@@ -1,0 +1,21 @@
+
+
+
+
+<div>
+<p>home works!</p>
+<button (click)="klik()">kliknij</button>
+<p *ngIf="isLoggedIn">Zalogowany jako: {{user?.email}} {{user?.displayName}}</p>
+<!-- Zalogowany jako: {{user?.email}} {{user?.displayName}} -->
+
+
+
+<button class="btn btn-primaty mr-2" *ngIf="!isLoggedIn" (click)="register()">Zarejestruj się!</button>
+<button class="btn btn-primaty" *ngIf="!isLoggedIn" (click)="login()">Zaloguj się się!</button>
+<button class="btn btn-primaty" *ngIf="isLoggedIn" (click)="logout()">Wyloguj się!</button>
+<div *ngIf="isLoggedIn">
+<!-- <p *ngIf="!user?.emailVerified">Potwierdz adres email</p> -->
+
+<button><img class="img-responsive" src="assets/pirateBot.png" (click)="singleplayer()"></button>
+<button><img class="img-responsive" src="assets/pirateMulti.png" (click)="multiplayer()"></button>
+</div></div>
