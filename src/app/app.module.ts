@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthService } from './auth/auth.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
