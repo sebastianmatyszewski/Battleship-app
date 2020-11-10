@@ -470,7 +470,6 @@ export class SingleplayerComponent implements OnInit {
     for (let i = 0; i < ship.mastCount; i++) {
       if (i > 0) {
         if (direction == 1) {
-          // console.log('direction = 1')
           if (this.leftBorder.includes(randomShipPosition + (i * direction) - direction) && this.rightBorder.includes(randomShipPosition + (i * direction))) {
             fieldUsed = true;
             break;
@@ -536,12 +535,7 @@ export class SingleplayerComponent implements OnInit {
         if (this.arrayBorder.includes(randomShipPosition + (i * direction) + 11)) {
           this.computerBoard[randomShipPosition + (i * direction) + 11].isBlock = true;
         }
-
-
-
-        // console.log('index statku na planszy: ' + (this.computerBoard[randomShipPosition+(i*direction)].shipIndex));
-
-
+//fe
       }
     } else {
       // console.log("przeszło petle");
