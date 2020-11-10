@@ -385,7 +385,7 @@ export class SingleplayerComponent implements OnInit {
         for(let j = 0; j<this.shipsInBoard[i].mastCount; j++){
           this.humanBoard[this.shipsInBoard[i].positionOnArray[j]] = 1
         //uzupełnienie tablicy gracza domyślnymi wartościami
-        
+
           for (let i = 0; i < 100; i++) {
             var test: shipArrayInterface = {
               index: i,
