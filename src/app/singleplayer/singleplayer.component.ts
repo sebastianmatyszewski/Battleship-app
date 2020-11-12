@@ -381,27 +381,27 @@ export class SingleplayerComponent implements OnInit {
     if(this.ships.length == 0){
       this.allShipPlaced = true;
 
+      //uzupełnienie tablicy gracza domyślnymi wartościami
+      for (let i = 0; i < 100; i++) {
+        var test: shipArrayInterface = {
+          index: i,
+          shipIndex: null,
+          isShip: false,
+          isBlock: false,
+          status: shipStatus.NO_ACTION,
+          positionOnBoard: []
+        }
+        this.playerBoard.push(test);
+      }
+
+
       for(let i = 0; i<this.shipsInBoard.length; i++){
         for(let j = 0; j<this.shipsInBoard[i].mastCount; j++){
-          this.humanBoard[this.shipsInBoard[i].positionOnArray[j]] = 1
-        //uzupełnienie tablicy gracza domyślnymi wartościami
-
-          for (let i = 0; i < 100; i++) {
-            var test: shipArrayInterface = {
-              index: i,
-              shipIndex: null,
-              isShip: false,
-              isBlock: false,
-              status: shipStatus.NO_ACTION,
-              positionOnBoard: []
-            }
-            this.playerBoard.push(test);
-          }
-
-          
-
-
- 
+          this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].isShip = true;
+          this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].isBlock = true;
+          this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].shipIndex = this.shipsInBoard[i].id;
+          // this.computerBoard[randomShipPosition + (i * direction) - 1].isBlock = true;
+          // this.humanBoard[this.shipsInBoard[i].positionOnArray[j]] = 1
         }
       }
       this.drawBotShips();
@@ -436,14 +436,6 @@ export class SingleplayerComponent implements OnInit {
       this.computerBoard.push(test);
     }
 
-    console.log(this.shipsInBoard[0]);
-    console.log(this.shipsInBoard[1]);
-    console.log(this.shipsInBoard[2]);
-    console.log(this.shipsInBoard[3]);
-    console.log(this.shipsInBoard[4]);
-    console.log(this.shipsInBoard[5]);
-    console.log(this.shipsInBoard[6]);
-    console.log(this.shipsInBoard[7]);
     
     this.generateBotShip(this.shipsInBoard[0]);
     this.generateBotShip(this.shipsInBoard[1]);
