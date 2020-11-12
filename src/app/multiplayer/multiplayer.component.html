@@ -1,1 +1,3 @@
-<p>multiplayer works!</p>
+<button *ngIf="!gameStarted" type="button" (click)="startgame()" class="btn btn-success">Rozpocznij grę!</button>
+
+<button *ngIf="gameStarted" type="button" class="btn btn-success">Gra rozpoczęta</button>

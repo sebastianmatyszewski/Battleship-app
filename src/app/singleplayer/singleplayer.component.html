@@ -1,3 +1,36 @@
+<div class="container" *ngIf="gameStarted">
+	<div class="row">
+		<div class="col player-board">
+			<ng-container *ngFor="let number of array(10), let i = index">
+				<div class="row">
+					<ng-container *ngFor="let number of array(10), let j = index">
+						<div class="col cell-size"
+						[class.player-board-ship-true] = "playerBoard[i*10 + j].isShip === true"
+						[class.player-board-ship-false] = "playerBoard[i*10 + j].isShip === false"
+						(click)="shothimself(playerBoard[i*10 + j])"
+						> {{playerBoard[i*10 + j].index}}</div>
+					</ng-container>
+				</div>
+			</ng-container>	
+		</div>	
+		<div class=" col bot-board">
+			<ng-container *ngFor="let number of array(10), let i = index">
+				<div class="row">
+					<ng-container *ngFor="let number of array(10), let j = index">
+						<div class="col cell-size"
+						[class.player-board-ship-true] = "computerBoard[i*10 + j].isShip === true"
+						[class.player-board-ship-false] = "computerBoard[i*10 + j].isShip === false"
+						[class.computer-board-ship-hit] = "computerBoard[i*10 + j].status == 0"
+						[class.computer-board-ship-miss] = "computerBoard[i*10 + j].status == 1"
+						(click)="shotEnemyBoard(computerBoard[i*10+j])"
+						> </div>
+					</ng-container>
+				</div>
+			</ng-container>	
+		</div>
+
+	</div>
+</div>
 
 <div class="container" *ngIf="!gameStarted">
     <div class="row">
@@ -36,7 +69,7 @@
 					<!-- <button ></button> -->{{i}}
 				</div>
 			</div>
-			<button *ngIf="allShipPlaced" type="button" class="btn btn-success" (click)="gameStarted = true">Rozpocznij grę!</button>
+			<button *ngIf="allShipPlaced" type="button" class="btn btn-success" (click)="startGame()">Rozpocznij grę!</button>
 			
 			<button *ngIf="!allShipPlaced" type="button" class="btn btn-secondary" disabled data-toggle="tooltip" data-placement="bottom" title="Rozmieść wszystkie statki na planszy!">
 				Rozpocznij grę!
@@ -96,10 +129,17 @@
 			</div>
 		</div>
 	</div>
-    </div>
+	
+	
 </div>
 
-
-
-
+<!-- <div class="container" *ngIf="gameStarted">
+	<div class="container">
+		<div class="row" *ngFor="let number of playerBoard" >
+			<div class="pokaz"></div>
+			<div class="col"> {{playerBoard[number].shipIndex}}</div>
+		</div>
+	</div>
+</div> -->
+ 
 

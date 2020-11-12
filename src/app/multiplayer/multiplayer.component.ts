@@ -8,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class MultiplayerComponent implements OnInit {
 
   constructor() { }
-
+  gameStarted = false;
   ngOnInit(): void {
+  }
+
+  startgame(){
+    this.gameStarted = true
   }
 
 }

@@ -139,3 +139,46 @@
   .class.ship-box-flex-vertically {
     display: flex;
   }
+
+  .pokaz{
+    background-color: yellow;
+  }
+/* Game started */
+  .cell-size{
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-width: 1px;
+    /* background-color: tomato; */
+  }
+
+  .player-board-ship-true{
+    background-color: rgb(145, 76, 64);
+    border-style: solid;
+    border-width: 1px;
+  }
+  .player-board-ship-false{
+    /* background-color: white; */
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  .computer-board-ship-hit{
+    background-color: red;
+    border-style: solid;
+    border-width: 1px;
+  }
+  .computer-board-ship-miss{
+    background-color: gray;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  .player-board{
+    margin: 20px;
+  }
+
+  .bot-board{
+    margin: 20px;
+
+  }

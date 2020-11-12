@@ -19,7 +19,8 @@ import {
 export class SingleplayerComponent implements OnInit {
   user
   isLoggedIn = false;
-  constructor(private auth: AuthService,) { }
+  gameStarted = false;
+  constructor(private auth: AuthService) { }
   @ViewChild('cdkBoard',{read:ElementRef,static:false}) boardElement
   public index: number;
   public shipPartId: any;
@@ -126,7 +127,7 @@ export class SingleplayerComponent implements OnInit {
   }
   
   allShipPlaced = false;
-  gameStarted = false;
+  
   ClickShipOrientation:any
   public shipsInBoard: any[] = [];
   position:any
@@ -395,20 +396,7 @@ export class SingleplayerComponent implements OnInit {
       }
 
 
-      for(let i = 0; i<this.shipsInBoard.length; i++){
-        for(let j = 0; j<this.shipsInBoard[i].mastCount; j++){
-          this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].isShip = true;
-          this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].isBlock = true;
-          this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].shipIndex = this.shipsInBoard[i].id;
-          // this.computerBoard[randomShipPosition + (i * direction) - 1].isBlock = true;
-          // this.humanBoard[this.shipsInBoard[i].positionOnArray[j]] = 1
-        }
-      }
-      this.drawBotShips();
-      for(let i = 0;i<this.humanBoard.length;i=i+10){
       
-        console.log(i + ': ' + (this.humanBoard[i]) + ' '+(this.humanBoard[i+1]) + ' '+(this.humanBoard[i+2]) + ' '+(this.humanBoard[i+3]) + ' '+(this.humanBoard[i+4]) + ' '+(this.humanBoard[i+5]) + ' '+(this.humanBoard[i+6]) + ' '+(this.humanBoard[i+7]) + ' '+(this.humanBoard[i+8]) + ' '+(this.humanBoard[i+9])); 
-      }
     }else{
       this.allShipPlaced = false;
     }
@@ -446,9 +434,63 @@ export class SingleplayerComponent implements OnInit {
     this.generateBotShip(this.shipsInBoard[6]);
     this.generateBotShip(this.shipsInBoard[7]);
 
+    console.log('Bot')
     for(let i = 0; i<this.computerBoard.length; i=i+10){
       console.log(i + ': ' + (this.computerBoard[i].isShip? 1:0) + ' '+(this.computerBoard[i+1].isShip? 1:0) + ' '+(this.computerBoard[i+2].isShip? 1:0) + ' '+(this.computerBoard[i+3].isShip? 1:0) + ' '+(this.computerBoard[i+4].isShip? 1:0) + ' '+(this.computerBoard[i+5].isShip? 1:0) + ' '+(this.computerBoard[i+6].isShip? 1:0) + ' '+(this.computerBoard[i+7].isShip? 1:0) + ' '+(this.computerBoard[i+8].isShip? 1:0) + ' '+(this.computerBoard[i+9].isShip? 1:0)); 
     }
+  }
+
+  startGame(){
+    
+    for(let i = 0; i<this.shipsInBoard.length; i++){
+      for(let j = 0; j<this.shipsInBoard[i].mastCount; j++){
+        // console.log(this.playerBoard[this.shipsInBoard[i].positionOnArray[j]])
+        this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].isShip = true;
+        this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].isBlock = true;
+        this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].shipIndex = this.shipsInBoard[i].id;
+        for(let k = 0; k<this.shipsInBoard.length; k++){
+          if(this.shipsInBoard[k].id == this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].shipIndex){
+            
+            this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].positionOnBoard.push(this.shipsInBoard[k].positionOnArray);
+            console.log(this.playerBoard[this.shipsInBoard[i].positionOnArray[j]].positionOnBoard)
+          }
+          
+        }
+
+
+        // this.computerBoard[randomShipPosition + (i * direction) - 1].isBlock = true;
+        // this.humanBoard[this.shipsInBoard[i].positionOnArray[j]] = 1
+      }
+    }
+
+
+
+        
+
+    
+    console.log('Player' + this.playerBoard.length + ', ' + this.humanBoard.length)
+    for(let i = 0;i<this.humanBoard.length;i=i+10){
+    
+      // console.log(i + ': ' + (this.humanBoard[i]) + ' '+(this.humanBoard[i+1]) + ' '+(this.humanBoard[i+2]) + ' '+(this.humanBoard[i+3]) + ' '+(this.humanBoard[i+4]) + ' '+(this.humanBoard[i+5]) + ' '+(this.humanBoard[i+6]) + ' '+(this.humanBoard[i+7]) + ' '+(this.humanBoard[i+8]) + ' '+(this.humanBoard[i+9])); 
+      
+      console.log(i + ': ' + (this.playerBoard[i].isShip? 1:0) + ' '+(this.playerBoard[i+1].isShip? 1:0) + ' '+(this.playerBoard[i+2].isShip? 1:0) + ' '+(this.playerBoard[i+3].isShip? 1:0) + ' '+(this.playerBoard[i+4].isShip? 1:0) + ' '+(this.playerBoard[i+5].isShip? 1:0) + ' '+(this.playerBoard[i+6].isShip? 1:0) + ' '+(this.playerBoard[i+7].isShip? 1:0) + ' '+(this.playerBoard[i+8].isShip? 1:0) + ' '+(this.playerBoard[i+9].isShip? 1:0)); 
+    }
+    this.drawBotShips();
+
+    for(let k = 0; k<this.computerBoard.length; k++){
+      if(this.computerBoard[k].isShip == true){
+        for(let i = 0; i<this.computerBoard.length; i++){
+          if(this.computerBoard[k].shipIndex == this.computerBoard[i].shipIndex){
+            this.computerBoard[k].positionOnBoard.push(this.computerBoard[i].index);
+            console.log(this.computerBoard[k].positionOnBoard)
+          }
+        }
+        
+      }
+      
+}
+    this.gameStarted = true;
+
   }
 
   generateBotShip(ship){
@@ -538,11 +580,25 @@ export class SingleplayerComponent implements OnInit {
     
   }
 
+  shothimself(shot){
+    console.log(this.playerBoard[shot.index])
+  }
+
+  shotEnemyBoard(shot){
+    console.log(this.computerBoard[shot.index])
+    if(shot.isShip === true){
+      this.computerBoard[shot.index].status = shipStatus.HIT;
+    }else{
+      this.computerBoard[shot.index].status = shipStatus.MISS;
+    }
+    console.log(this.computerBoard[shot.index])
+  }
+
   getRandomNumber(): number {
     return angularMath.getIntegerRandomRange(0, 99);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if(localStorage.getItem('user')!== null){
       this.isLoggedIn = true;
       this.user = JSON.parse(localStorage.getItem("user"));
@@ -556,6 +612,9 @@ export class SingleplayerComponent implements OnInit {
     //   // .subscribe(user =>{
     //     this.user = this.auth.user;
       // })
+  }
+  zrobcos(){
+    console.log('robie coś')
   }
 
 }
