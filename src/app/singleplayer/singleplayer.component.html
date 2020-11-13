@@ -1,8 +1,22 @@
 <div class="container" *ngIf="gameStarted">
 	<div class="row">
 		<div class="col player-board">
+			<div class="row">
+				<div class="col board-letters"></div>
+				<div class="col board-letters">A</div>
+				<div class="col board-letters">B</div>
+				<div class="col board-letters">C</div>
+				<div class="col board-letters">D</div>
+				<div class="col board-letters">E</div>
+				<div class="col board-letters">F</div>
+				<div class="col board-letters">G</div>
+				<div class="col board-letters">H</div>
+				<div class="col board-letters">I</div>
+				<div class="col board-letters">J</div>
+			</div>
 			<ng-container *ngFor="let number of array(10), let i = index">
 				<div class="row">
+					<div class="col board-numbers">{{i}}</div>
 					<ng-container *ngFor="let number of array(10), let j = index">
 						<div class="col cell-size"
 						[class.player-board-ship-true] = "playerBoard[i*10 + j].isShip === true"
@@ -14,12 +28,25 @@
 			</ng-container>	
 		</div>	
 		<div class=" col bot-board">
+			<div class="row">
+				<div class="col board-letters"></div>
+				<div class="col board-letters">A</div>
+				<div class="col board-letters">B</div>
+				<div class="col board-letters">C</div>
+				<div class="col board-letters">D</div>
+				<div class="col board-letters">E</div>
+				<div class="col board-letters">F</div>
+				<div class="col board-letters">G</div>
+				<div class="col board-letters">H</div>
+				<div class="col board-letters">I</div>
+				<div class="col board-letters">J</div>
+			</div>
 			<ng-container *ngFor="let number of array(10), let i = index">
 				<div class="row">
+					<div class="col board-numbers">{{i}}</div>
 					<ng-container *ngFor="let number of array(10), let j = index">
 						<div class="col cell-size"
-						[class.player-board-ship-true] = "computerBoard[i*10 + j].isShip === true"
-						[class.player-board-ship-false] = "computerBoard[i*10 + j].isShip === false"
+						
 						[class.computer-board-ship-hit] = "computerBoard[i*10 + j].status == 0"
 						[class.computer-board-ship-miss] = "computerBoard[i*10 + j].status == 1"
 						(click)="shotEnemyBoard(computerBoard[i*10+j])"
