@@ -1,4 +1,4 @@
-<div class="container" *ngIf="gameStarted">
+<div class="container" *ngIf="gameIsPending">
 	<div class="row">
 		<div class="col player-board">
 			<div class="row">
@@ -16,16 +16,21 @@
 			</div>
 			<ng-container *ngFor="let number of array(10), let i = index">
 				<div class="row">
-					<div class="col board-numbers">{{i}}</div>
+					<div class="col board-numbers">{{i+1}}</div>
 					<ng-container *ngFor="let number of array(10), let j = index">
 						<div class="col cell-size"
 						[class.player-board-ship-true] = "playerBoard[i*10 + j].isShip === true"
 						[class.player-board-ship-false] = "playerBoard[i*10 + j].isShip === false"
-						(click)="shothimself(playerBoard[i*10 + j])"
+						[class.computer-board-ship-hit] = "playerBoard[i*10 + j].status == 1"
+						[class.computer-board-ship-miss] = "playerBoard[i*10 + j].status == 0"
 						> {{playerBoard[i*10 + j].index}}</div>
 					</ng-container>
 				</div>
 			</ng-container>	
+			<div class="row">
+				
+				<div class="col board-status">{{computerHitStatus}}</div>
+			</div>
 		</div>	
 		<div class=" col bot-board">
 			<div class="row">
@@ -43,23 +48,28 @@
 			</div>
 			<ng-container *ngFor="let number of array(10), let i = index">
 				<div class="row">
-					<div class="col board-numbers">{{i}}</div>
+					<div class="col board-numbers">{{i+1}}</div>
 					<ng-container *ngFor="let number of array(10), let j = index">
 						<div class="col cell-size"
-						
-						[class.computer-board-ship-hit] = "computerBoard[i*10 + j].status == 0"
-						[class.computer-board-ship-miss] = "computerBoard[i*10 + j].status == 1"
-						(click)="shotEnemyBoard(computerBoard[i*10+j])"
+						data-toggle="tooltip" data-placement="div" title={{computerBoard[i*10+j].tooltip}}
+
+						[class.computer-board-ship-hit] = "computerBoard[i*10 + j].status == 1"
+						[class.computer-board-ship-miss] = "computerBoard[i*10 + j].status == 0"
+						[class.computer-board-ship-noaction] = "computerBoard[i*10 + j].status == 2"
+						(click)="playerShot(computerBoard[i*10+j])"
 						> </div>
 					</ng-container>
 				</div>
 			</ng-container>	
+			<div class="row">
+				<div class="col board-status">{{playerHitStatus}}</div>
+			</div>
 		</div>
 
 	</div>
 </div>
 
-<div class="container" *ngIf="!gameStarted">
+<div class="container" *ngIf="!gameIsPending">
     <div class="row">
 		
 		<div  cdkDropList #cdkBoard=cdkDropList [cdkDropListData]="shipsInBoard" [cdkDropListConnectedTo]="[cdkShips]"

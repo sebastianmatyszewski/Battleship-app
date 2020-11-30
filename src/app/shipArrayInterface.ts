@@ -4,12 +4,17 @@ export interface shipArrayInterface{
     isShip: boolean;
     isBlock: boolean;
     status: shipStatus;
+    tooltip: String;
     positionOnBoard: Array<number>;
     
 }
-
+export enum shipDirection {
+    NOT_SET,
+    HORIZONTAL,
+    VERTICAL
+  }
 export enum shipStatus {
-    HIT,
     MISS,
+    HIT,
     NO_ACTION
   }
