@@ -35,10 +35,11 @@ export class SingleplayerComponent implements OnInit {
   // Zmienne bota
   shotShipDirection = shipDirection.NOT_SET;
   shotShipPosition: number;
-  shotShipArray: number[];
+  shotShipArray: number[] = new Array();
   isShipShoted: Boolean = false;
   isShipShotedPosition: number;
-  isShipShotedPositionCount: number = 0;
+  isShipShotedPositionDirection: number;
+  isShipShotedPositionCount: number[] = new Array();
 
 
 
@@ -702,177 +703,169 @@ export class SingleplayerComponent implements OnInit {
   async delay(ms: number) {
     await new Promise(resolve => setTimeout(()=>resolve(), ms));
 }
-  computerShot(){
-    
-    if(this.isShipShoted){
+ 
+computerShot(){
+  if(this.isShipShoted){
+    if(this.isShipShotedPositionCount.length == 2){
       if(this.shotShipDirection == shipDirection.HORIZONTAL){
-        console.log('horizontal')
+        this.shotShipDirection = shipDirection.VERTICAL
+
+      }else{
+        this.shotShipDirection = shipDirection.HORIZONTAL
+
       }
-      if(this.shotShipDirection == shipDirection.VERTICAL){
-        console.log('vertical')
-      }
-      if(this.shotShipDirection == shipDirection.NOT_SET){
-        console.log('2 strzał')
-        // wybierz losowo horizontal lub vertical
-        // 0 = horizontal
-        // 1 = vertical
-        
-        if(angularMath.getIntegerRandomRange(0, 1) == 0){
-          
-          this.shotShipDirection = shipDirection.HORIZONTAL;
-          //wybierz lewo/prawo
-          //0 = lewo
-          //1 = prawo
-          //this.playerBoard[shot].positionOnBoard
-          // let randomDirection = angularMath.getIntegerRandomRange(0, 1);
-          if(this.isShipShotedPosition%10 == 0){
-            // let max = this.playerBoard[shot].positionOnBoard.reduce((a, b) => Math.max(a, b));
-            this.checkComputerShot(this.isShipShotedPosition+1)
-            this.shotShipPosition = 0;  // lewo
-          }else if(this.isShipShotedPosition%10 == 9){
-            this.checkComputerShot(this.isShipShotedPosition-1)
-            this.shotShipPosition = 1;  // prawo
-          }else{
-            if(angularMath.getIntegerRandomRange(0, 1) == 0){
-              this.shotShipPosition = 0
-              this.checkComputerShot(this.isShipShotedPosition+1)
-              if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
-                this.shotShipPosition = 1
-                this.isShipShotedPositionCount+1
-              }
-            }else{
-              this.shotShipPosition = 1
-              this.checkComputerShot(this.isShipShotedPosition-1)
-              if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
-                this.shotShipPosition = 0
-                this.isShipShotedPositionCount+1
-              }
-            }
-            
-          }
-          if(this.shotShipPosition == 0){
-            console.log('lewo')
-          }else{
-            console.log('prawo')
-          }
-          // if(angularMath.getIntegerRandomRange(0, 1) == 0){
+    }
 
-
-          // }
-
+    if(this.shotShipDirection == shipDirection.HORIZONTAL){
+      console.log('shipDirection HORIZONTAL')
+      
+      if(this.shotShipPosition == 0){
+        console.log('max ' + Math.max(...this.shotShipArray))
+        console.log('min ' + Math.min(...this.shotShipArray))
+        console.log('idz w lewo od pola ' + this.isShipShotedPosition)
+        if(this.isShipShotedPosition%10 == 0){
+          this.shotShipPosition = 1;
+          this.isShipShotedPosition = Math.max(...this.shotShipArray)
+          this.checkComputerShot((this.isShipShotedPosition+1))
         }else{
-          // let randomDirection = angularMath.getIntegerRandomRange(0, 1);
-          this.shotShipDirection = shipDirection.VERTICAL;
-          if(this.isShipShotedPosition+10 > 100){
-            // let max = this.playerBoard[shot].positionOnBoard.reduce((a, b) => Math.max(a, b));
-            
-            console.log(this.isShipShotedPosition-10)
-            this.checkComputerShot(this.isShipShotedPosition-10)
-        // if(!(this.playerBoard[this.isShipShotedPosition].positionOnBoard[0]+10 > 100)){
-            // console.log(this.playerBoard[this.isShipShotedPosition].positionOnBoard[0]-10)
-            // this.checkComputerShot(this.playerBoard[this.isShipShotedPosition].positionOnBoard[0])
-            this.shotShipPosition = 0;  // góra
-          }else if(this.isShipShotedPosition-10 < 0){
-            console.log(this.isShipShotedPosition+10)
-            this.checkComputerShot(this.isShipShotedPosition+10)
-            
-            this.shotShipPosition = 1; //dół
-          }else{
-            if(angularMath.getIntegerRandomRange(0, 1) == 0){
-              this.shotShipPosition = 0
-              console.log(this.isShipShotedPosition-10)
-              this.checkComputerShot(this.isShipShotedPosition-10)
-              if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
-                this.shotShipPosition = 1
-                this.isShipShotedPositionCount+1
-              }
-              
-            }else{
-              this.shotShipPosition = 1
-              console.log(this.isShipShotedPosition+10)
-              this.checkComputerShot(this.isShipShotedPosition+10)
-              if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
-                this.shotShipPosition = 0
-                this.isShipShotedPositionCount+1
-                
-              }
-              
-              
-            }
-            
+          this.checkComputerShot((this.isShipShotedPosition-1))
+          if(this.playerBoard[this.isShipShotedPosition].status == 0){
+            this.shotShipPosition = 1
+            this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
           }
-          if(this.shotShipPosition == 0){
-            console.log('góra')
-          }else{
-            console.log('dół')
+        }
+        
+
+      }else{
+        console.log('max ' + Math.max(...this.shotShipArray))
+        console.log('min ' + Math.min(...this.shotShipArray))
+        console.log('idz w prawo od pola ' + this.isShipShotedPosition)
+        if(this.isShipShotedPosition%10 == 9){
+          this.shotShipPosition = 0;
+          this.isShipShotedPosition = Math.min(...this.shotShipArray)
+          this.checkComputerShot((this.isShipShotedPosition-1))
+        }else{
+          this.checkComputerShot((this.isShipShotedPosition+1))
+          if(this.playerBoard[this.isShipShotedPosition].status == 0){
+            this.shotShipPosition = 0
+            this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
           }
-          
         }
       }
-    }else{
-      var shot = this.getRandomNumber();
-
+ 
       
-      this.checkComputerShot(shot);
 
+    }else if(this.shotShipDirection == shipDirection.VERTICAL){
+      console.log('shipDirection VERTICAL')
+
+
+    }else{
+      console.log('shipDirection NOT SET')
+      if(angularMath.getIntegerRandomRange(0, 0) == 0){
+        this.shotShipDirection = shipDirection.HORIZONTAL;
+        if(this.isShipShotedPosition%10 == 0){
+          this.checkComputerShot(this.isShipShotedPosition+1)
+          this.shotShipPosition = 1;
+        }else if(this.isShipShotedPosition%10 == 9){
+          this.checkComputerShot((this.isShipShotedPosition-1))
+          this.shotShipPosition = 0;  // prawo
+        }else{
+          if(angularMath.getIntegerRandomRange(0, 1) == 0){
+            this.shotShipPosition = 0
+            this.checkComputerShot(this.isShipShotedPosition-1)
+            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              this.shotShipPosition = 1
+              this.isShipShotedPosition++
+              this.isShipShotedPositionCount.push(1)
+            }
+            
+          }else{
+            this.shotShipPosition = 1
+            this.checkComputerShot(this.isShipShotedPosition+1)
+            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              this.shotShipPosition = 0
+              this.isShipShotedPosition--
+              this.isShipShotedPositionCount.push(1)
+            }
+          }
+        }
+      }else{
+        console.log("VERTICAL")
+      }
+    }
+
+  }else{
+    var shot = this.getRandomNumber();
+    if(this.playerBoard[shot].status == 2){
+      this.checkComputerShot(shot);
+      
+    }else{
+      console.log('Trzeba powtorzyc')
+      this.computerShot();
     }
     
-
   }
 
-  checkComputerShot(shot){
-    var hitAndSink = 0;
-      if(this.playerBoard[shot].status === shipStatus.NO_ACTION){
-        if(this.playerBoard[shot].isShip){
-          console.log('Dlugosc ' + this.playerBoard[shot].positionOnBoard.length)
-          console.log('this.playerBoard')
-          console.log(this.playerBoard)
-          this.playerBoard[shot].status = shipStatus.HIT;
-          // this.playerBoard[shot].positionOnBoard.push(shot)
-          if(this.playerBoard[shot].positionOnBoard.length == 1){
-            // this.playerBoard[shot].status = shipStatus.HIT;
+}
+checkComputerShot(shot){
+  var hitAndSink = 0;
+    if(this.playerBoard[shot].status === shipStatus.NO_ACTION){
+      if(this.playerBoard[shot].isShip){
+        console.log('Dlugosc ' + this.playerBoard[shot].positionOnBoard.length)
+        console.log('this.playerBoard')
+        console.log(this.playerBoard)
+        this.playerBoard[shot].status = shipStatus.HIT;
+        // this.playerBoard[shot].positionOnBoard.push(shot)
+        if(this.playerBoard[shot].positionOnBoard.length == 1){
+          // this.playerBoard[shot].status = shipStatus.HIT;
+          this.computerHitStatus = "TRAFIONY ZATOPIONY"
+          this.shipsShotedByComputer = this.shipsShotedByComputer + 1;
+          console.log('BOT: ' + this.shipsShotedByComputer + '/' + this.shipsInBoard.length)
+          this.isShipShoted = false;
+        }else{
+          for(var i = 0; i<this.playerBoard[shot].positionOnBoard.length; i++){
+            console.log(this.playerBoard[shot].positionOnBoard.length)
+            console.log(this.playerBoard[shot].positionOnBoard[i][i])
+            console.log(this.playerBoard[this.playerBoard[shot].positionOnBoard[i][i]].status)
+            if(this.playerBoard[this.playerBoard[shot].positionOnBoard[i][i]].status == 1){
+              hitAndSink = hitAndSink + 1;
+            }
+          }
+          console.log('hitAndSink ' + hitAndSink)
+          if(hitAndSink == this.playerBoard[shot].positionOnBoard.length){
             this.computerHitStatus = "TRAFIONY ZATOPIONY"
             this.shipsShotedByComputer = this.shipsShotedByComputer + 1;
             console.log('BOT: ' + this.shipsShotedByComputer + '/' + this.shipsInBoard.length)
             this.isShipShoted = false;
+            this.isShipShotedPositionCount = [];
+            this.shotShipArray = [];
+            this.shotShipDirection = shipDirection.NOT_SET
           }else{
-            for(var i = 0; i<this.playerBoard[shot].positionOnBoard.length; i++){
-              console.log(this.playerBoard[shot].positionOnBoard.length)
-              console.log(this.playerBoard[shot].positionOnBoard[i][i])
-              console.log(this.playerBoard[this.playerBoard[shot].positionOnBoard[i][i]].status)
-              if(this.playerBoard[this.playerBoard[shot].positionOnBoard[i][i]].status == 1){
-                hitAndSink = hitAndSink + 1;
-              }
-            }
-            console.log('hitAndSink ' + hitAndSink)
-            if(hitAndSink == this.playerBoard[shot].positionOnBoard.length){
-              this.computerHitStatus = "TRAFIONY ZATOPIONY"
-              this.shipsShotedByComputer = this.shipsShotedByComputer + 1;
-              console.log('BOT: ' + this.shipsShotedByComputer + '/' + this.shipsInBoard.length)
-              this.isShipShoted = false;
-              this.isShipShotedPositionCount = 0;
-            }else{
-              this.computerHitStatus = "TRAFIONY"
-              this.isShipShoted = true;
-              this.isShipShotedPosition = shot;
-            }
-            // this.playerBoard[shot].status = shipStatus.HIT;
-            // this.playerBoard[shot].positionOnBoard.push(shot)
-            
+            this.computerHitStatus = "TRAFIONY"
+            this.isShipShoted = true;
+            this.isShipShotedPosition = shot;
+            this.shotShipArray.push(this.isShipShotedPosition)
           }
-        }else{
-          this.playerBoard[shot].status = shipStatus.MISS;
-          this.computerHitStatus = "PUDŁO"
+          // this.playerBoard[shot].status = shipStatus.HIT;
+          // this.playerBoard[shot].positionOnBoard.push(shot)
+          
         }
-
+      }else{
+        this.playerBoard[shot].status = shipStatus.MISS;
+        this.computerHitStatus = "PUDŁO"
+        this.isShipShotedPosition = shot;
       }
 
-      if(this.shipsShotedByComputer == this.shipsInBoard.length){
-        alert("BOT wygrał"); 
-        this.gameIsPending = false;
-        
-        
-      }
+    }
+
+    if(this.shipsShotedByComputer == this.shipsInBoard.length){
+      alert("BOT wygrał"); 
+      this.gameIsPending = false;
+      
+      
+    }
   }
 
   checkComputerShot1(shot){
@@ -919,7 +912,7 @@ export class SingleplayerComponent implements OnInit {
 
   computerShot2(){
     var shot = this.getRandomNumber();
-    this.checkComputerShot(shot);
+    this.checkComputerShot1(shot);
 
     
   }
