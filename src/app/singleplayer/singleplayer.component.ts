@@ -724,16 +724,37 @@ computerShot(){
         console.log('min ' + Math.min(...this.shotShipArray))
         console.log('idz w lewo od pola ' + this.isShipShotedPosition)
         if(this.isShipShotedPosition%10 == 0){
-          this.shotShipPosition = 1;
-          this.isShipShotedPosition = Math.max(...this.shotShipArray)
-          this.checkComputerShot((this.isShipShotedPosition+1))
-        }else{
-          this.checkComputerShot((this.isShipShotedPosition-1))
-          if(this.playerBoard[this.isShipShotedPosition].status == 0){
-            this.shotShipPosition = 1
-            this.isShipShotedPosition = Math.max(...this.shotShipArray)
+          if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
             this.isShipShotedPositionCount.push(1)
+            // this.isShipShotedPositionCount.push(1)
+            // this.shotShipDirection = shipDirection.VERTICAL
+            console.log('this.computerShot3();')
+            this.computerShot();
+          }else{
+            this.shotShipPosition = 1;
+          // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+          this.checkComputerShot((this.isShipShotedPosition+1))
+          console.log('this.computerShot2();')
           }
+          
+          // this.computerShot();
+        }else{
+          if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
+            this.shotShipPosition = 1
+            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
+            this.checkComputerShot((this.isShipShotedPosition-1))
+            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              this.shotShipPosition = 1
+              this.isShipShotedPosition = Math.max(...this.shotShipArray)
+              this.isShipShotedPositionCount.push(1)
+          }
+          }
+          
         }
         
 
@@ -742,16 +763,36 @@ computerShot(){
         console.log('min ' + Math.min(...this.shotShipArray))
         console.log('idz w prawo od pola ' + this.isShipShotedPosition)
         if(this.isShipShotedPosition%10 == 9){
-          this.shotShipPosition = 0;
-          this.isShipShotedPosition = Math.min(...this.shotShipArray)
-          this.checkComputerShot((this.isShipShotedPosition-1))
-        }else{
-          this.checkComputerShot((this.isShipShotedPosition+1))
-          if(this.playerBoard[this.isShipShotedPosition].status == 0){
-            this.shotShipPosition = 0
-            this.isShipShotedPosition = Math.min(...this.shotShipArray)
+          if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
             this.isShipShotedPositionCount.push(1)
+            // this.isShipShotedPositionCount.push(1)
+            // this.shotShipDirection = shipDirection.VERTICAL
+            console.log('this.computerShot3();')
+            this.computerShot();
+          }else{
+            this.shotShipPosition = 0;
+            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.checkComputerShot((this.isShipShotedPosition-1))
+            console.log('this.computerShot2();')
+            // this.computerShot();
           }
+        }else{
+          if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
+            this.shotShipPosition = 0
+            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
+            this.checkComputerShot((this.isShipShotedPosition+1))
+            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              this.shotShipPosition = 0
+              this.isShipShotedPosition = Math.min(...this.shotShipArray)
+              this.isShipShotedPositionCount.push(1)
+          }
+          }
+          
         }
       }
  
@@ -759,11 +800,85 @@ computerShot(){
 
     }else if(this.shotShipDirection == shipDirection.VERTICAL){
       console.log('shipDirection VERTICAL')
+      if(this.shotShipPosition == 0){
+        console.log('max ' + Math.max(...this.shotShipArray))
+        console.log('min ' + Math.min(...this.shotShipArray))
+        console.log('idz w górę od pola ' + this.isShipShotedPosition)
+        if(this.isShipShotedPosition-10 < 0){
+          if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+            this.isShipShotedPositionCount.push(1)
+            // this.isShipShotedPositionCount.push(1)
+            // this.shotShipDirection = shipDirection.HORIZONTAL
+            console.log('this.computerShot3();')
+            this.computerShot();
+          }else{
+            this.shotShipPosition = 1;
+            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.checkComputerShot((this.isShipShotedPosition+10))
+            console.log('this.computerShot2();')
+            // this.computerShot();
+          }
+        }else{
+          if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+            this.shotShipPosition = 1
+            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
+            this.checkComputerShot((this.isShipShotedPosition-10))
+            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              this.shotShipPosition = 1
+              this.isShipShotedPosition = Math.max(...this.shotShipArray)
+              this.isShipShotedPositionCount.push(1)
+            }
+          }
+          
+        }
+        
 
+      }else{
+        console.log('max ' + Math.max(...this.shotShipArray))
+        console.log('min ' + Math.min(...this.shotShipArray))
+        console.log('idz w dół od pola ' + this.isShipShotedPosition)
+        if(this.isShipShotedPosition+10 >100){
+          if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+            this.isShipShotedPositionCount.push(1)
+            // this.isShipShotedPositionCount.push(1)
+            // this.shotShipDirection = shipDirection.HORIZONTAL
+            console.log('this.computerShot3();')
+            this.computerShot();
+          }else{
+            this.shotShipPosition = 0;
+            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.checkComputerShot((this.isShipShotedPosition-10))
+            console.log('this.computerShot2();')
+            // this.computerShot();
+          }
+        }else{
+          if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+            this.shotShipPosition = 0
+            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
+              this.checkComputerShot((this.isShipShotedPosition+10))
+            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              this.shotShipPosition = 0
+              this.isShipShotedPosition = Math.min(...this.shotShipArray)
+              this.isShipShotedPositionCount.push(1)
+            }
+          }
+          
+        }
+      }
 
     }else{
       console.log('shipDirection NOT SET')
-      if(angularMath.getIntegerRandomRange(0, 0) == 0){
+      if(angularMath.getIntegerRandomRange(0, 1) == 0){
         this.shotShipDirection = shipDirection.HORIZONTAL;
         if(this.isShipShotedPosition%10 == 0){
           this.checkComputerShot(this.isShipShotedPosition+1)
@@ -774,25 +889,114 @@ computerShot(){
         }else{
           if(angularMath.getIntegerRandomRange(0, 1) == 0){
             this.shotShipPosition = 0
-            this.checkComputerShot(this.isShipShotedPosition-1)
-            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+            if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
               this.shotShipPosition = 1
               this.isShipShotedPosition++
               this.isShipShotedPositionCount.push(1)
+            }else{
+              if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
+                this.shotShipPosition = 1
+                // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+                this.isShipShotedPositionCount.push(1)
+                console.log('this.computerShot();')
+                this.computerShot();
+                
+              }else{
+                this.checkComputerShot(this.isShipShotedPosition-1)
+                if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                  this.shotShipPosition = 1
+                  this.isShipShotedPosition++
+                  this.isShipShotedPositionCount.push(1)
+                }
+              }
             }
+            
             
           }else{
             this.shotShipPosition = 1
-            this.checkComputerShot(this.isShipShotedPosition+1)
-            if(this.playerBoard[this.isShipShotedPosition].status == 0){
+            if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
               this.shotShipPosition = 0
               this.isShipShotedPosition--
               this.isShipShotedPositionCount.push(1)
+            }else{
+              if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
+                this.shotShipPosition = 0
+                // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+                this.isShipShotedPositionCount.push(1)
+                console.log('this.computerShot();')
+                this.computerShot();
+                
+              }else{
+                this.checkComputerShot(this.isShipShotedPosition+1)
+                if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                  this.shotShipPosition = 0
+                  this.isShipShotedPosition--
+                  this.isShipShotedPositionCount.push(1)
+                }
+              }
             }
+            
           }
         }
       }else{
         console.log("VERTICAL")
+        this.shotShipDirection = shipDirection.VERTICAL;
+        if(this.isShipShotedPosition-10 < 0){
+          this.checkComputerShot(this.isShipShotedPosition+10)
+          this.shotShipPosition = 1;
+        }else if(this.isShipShotedPosition+10 > 100){
+          this.checkComputerShot((this.isShipShotedPosition-10))
+          this.shotShipPosition = 0;  // prawo
+        }else{
+          if(angularMath.getIntegerRandomRange(0, 1) == 0){
+            this.shotShipPosition = 0
+            if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+              this.shotShipPosition = 1
+              this.isShipShotedPosition = this.isShipShotedPosition + 10
+              this.isShipShotedPositionCount.push(1)
+            }else{
+              if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+                this.shotShipPosition = 1
+                // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+                this.isShipShotedPositionCount.push(1)
+                console.log('this.computerShot();')
+                this.computerShot();
+                
+              }else{
+                this.checkComputerShot(this.isShipShotedPosition-10)
+                if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                  this.shotShipPosition = 1
+                  this.isShipShotedPosition = this.isShipShotedPosition + 10
+                  this.isShipShotedPositionCount.push(1)
+                }
+              }
+            }
+            
+            
+          }else{
+            this.shotShipPosition = 1
+            if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+              this.shotShipPosition = 0
+              this.isShipShotedPosition = this.isShipShotedPosition - 10
+              this.isShipShotedPositionCount.push(1)
+            }
+            if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+              this.shotShipPosition = 0
+              // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+              this.isShipShotedPositionCount.push(1)
+              console.log('this.computerShot();')
+              this.computerShot();
+              
+            }else{
+              this.checkComputerShot(this.isShipShotedPosition+10)
+              if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                this.shotShipPosition = 0
+                this.isShipShotedPosition = this.isShipShotedPosition - 10
+                this.isShipShotedPositionCount.push(1)
+              }
+            }
+          }
+        }
       }
     }
 
@@ -847,6 +1051,15 @@ checkComputerShot(shot){
             this.isShipShoted = true;
             this.isShipShotedPosition = shot;
             this.shotShipArray.push(this.isShipShotedPosition)
+            // if(this.shotShipArray.length == 2){
+            //   if(this.shotShipDirection == shipDirection.HORIZONTAL){
+            //     this.shotShipDirection = shipDirection.VERTICAL
+        
+            //   }else{
+            //     this.shotShipDirection = shipDirection.HORIZONTAL
+        
+            //   }
+            // }
           }
           // this.playerBoard[shot].status = shipStatus.HIT;
           // this.playerBoard[shot].positionOnBoard.push(shot)
