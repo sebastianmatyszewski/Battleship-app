@@ -683,6 +683,7 @@ export class SingleplayerComponent implements OnInit {
         this.computerBoard[shot.index].status = shipStatus.MISS;
           
           this.playerHitStatus = "PUDŁO"
+          
       }
       
       // console.log(this.computerBoard[shot.index])
@@ -709,11 +710,14 @@ computerShot(){
     if(this.isShipShotedPositionCount.length == 2){
       if(this.shotShipDirection == shipDirection.HORIZONTAL){
         this.shotShipDirection = shipDirection.VERTICAL
-
+        this.isShipShotedPositionCount.push(1)
       }else{
         this.shotShipDirection = shipDirection.HORIZONTAL
-
+        this.isShipShotedPositionCount.push(1)
       }
+    }else if(this.isShipShotedPositionCount.length >20){
+        // alert("Error"); 
+        this.gameIsPending = false;
     }
 
     if(this.shotShipDirection == shipDirection.HORIZONTAL){
@@ -724,15 +728,20 @@ computerShot(){
         console.log('min ' + Math.min(...this.shotShipArray))
         console.log('idz w lewo od pola ' + this.isShipShotedPosition)
         if(this.isShipShotedPosition%10 == 0){
+          this.shotShipPosition = 1
           if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
+            console.log('pudlo1')
             this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             // this.isShipShotedPositionCount.push(1)
-            // this.shotShipDirection = shipDirection.VERTICAL
+            this.shotShipDirection = shipDirection.VERTICAL
             console.log('this.computerShot3();')
             this.computerShot();
           }else{
             this.shotShipPosition = 1;
-          // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+          this.isShipShotedPosition = Math.max(...this.shotShipArray)
           this.checkComputerShot((this.isShipShotedPosition+1))
           console.log('this.computerShot2();')
           }
@@ -740,18 +749,22 @@ computerShot(){
           // this.computerShot();
         }else{
           if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
+            console.log('pudlo2')
             this.shotShipPosition = 1
-            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPosition = Math.max(...this.shotShipArray)  /////////////////////////////////////////////////////////////////////////////////////
             this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             console.log('this.computerShot();')
             this.computerShot();
             
           }else{
             this.checkComputerShot((this.isShipShotedPosition-1))
             if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              console.log('pudlo3')
               this.shotShipPosition = 1
               this.isShipShotedPosition = Math.max(...this.shotShipArray)
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
           }
           }
           
@@ -763,33 +776,42 @@ computerShot(){
         console.log('min ' + Math.min(...this.shotShipArray))
         console.log('idz w prawo od pola ' + this.isShipShotedPosition)
         if(this.isShipShotedPosition%10 == 9){
+          this.shotShipPosition = 0
           if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
+            console.log('pudlo4')
             this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             // this.isShipShotedPositionCount.push(1)
-            // this.shotShipDirection = shipDirection.VERTICAL
+            this.shotShipDirection = shipDirection.VERTICAL
             console.log('this.computerShot3();')
             this.computerShot();
           }else{
             this.shotShipPosition = 0;
-            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.isShipShotedPosition = Math.min(...this.shotShipArray)
             this.checkComputerShot((this.isShipShotedPosition-1))
             console.log('this.computerShot2();')
             // this.computerShot();
           }
         }else{
           if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
+            console.log('pudlo5')
             this.shotShipPosition = 0
-            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.isShipShotedPosition = Math.min(...this.shotShipArray) ////////////////////////////////////////////////////////////////////
             this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             console.log('this.computerShot();')
             this.computerShot();
             
           }else{
             this.checkComputerShot((this.isShipShotedPosition+1))
             if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              console.log('pudlo6')
               this.shotShipPosition = 0
               this.isShipShotedPosition = Math.min(...this.shotShipArray)
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
           }
           }
           
@@ -806,23 +828,29 @@ computerShot(){
         console.log('idz w górę od pola ' + this.isShipShotedPosition)
         if(this.isShipShotedPosition-10 < 0){
           if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+            console.log('pudlo7')
             this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             // this.isShipShotedPositionCount.push(1)
-            // this.shotShipDirection = shipDirection.HORIZONTAL
+            this.shotShipDirection = shipDirection.HORIZONTAL
             console.log('this.computerShot3();')
             this.computerShot();
           }else{
             this.shotShipPosition = 1;
-            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPosition = Math.max(...this.shotShipArray)
             this.checkComputerShot((this.isShipShotedPosition+10))
             console.log('this.computerShot2();')
             // this.computerShot();
           }
         }else{
           if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+            console.log('pudlo8')
             this.shotShipPosition = 1
-            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPosition = Math.max(...this.shotShipArray)  ///////////////////////////////////////////////
             this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             console.log('this.computerShot();')
             this.computerShot();
             
@@ -832,6 +860,7 @@ computerShot(){
               this.shotShipPosition = 1
               this.isShipShotedPosition = Math.max(...this.shotShipArray)
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
             }
           }
           
@@ -844,32 +873,41 @@ computerShot(){
         console.log('idz w dół od pola ' + this.isShipShotedPosition)
         if(this.isShipShotedPosition+10 >100){
           if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+            console.log('pudlo9')
             this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             // this.isShipShotedPositionCount.push(1)
-            // this.shotShipDirection = shipDirection.HORIZONTAL
+            this.shotShipDirection = shipDirection.HORIZONTAL
             console.log('this.computerShot3();')
             this.computerShot();
           }else{
+            
             this.shotShipPosition = 0;
-            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.isShipShotedPosition = Math.min(...this.shotShipArray)
             this.checkComputerShot((this.isShipShotedPosition-10))
             console.log('this.computerShot2();')
             // this.computerShot();
           }
         }else{
           if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+            console.log('pudlo10')
             this.shotShipPosition = 0
-            // this.isShipShotedPosition = Math.min(...this.shotShipArray)
+            this.isShipShotedPosition = Math.min(...this.shotShipArray)
             this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             console.log('this.computerShot();')
             this.computerShot();
             
           }else{
               this.checkComputerShot((this.isShipShotedPosition+10))
             if(this.playerBoard[this.isShipShotedPosition].status == 0){
+              console.log('pudlo11')
               this.shotShipPosition = 0
               this.isShipShotedPosition = Math.min(...this.shotShipArray)
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
             }
           }
           
@@ -881,32 +919,61 @@ computerShot(){
       if(angularMath.getIntegerRandomRange(0, 1) == 0){
         this.shotShipDirection = shipDirection.HORIZONTAL;
         if(this.isShipShotedPosition%10 == 0){
+          if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
+            console.log('pudlo12')
+            // this.shotShipPosition = 0
+            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
           this.checkComputerShot(this.isShipShotedPosition+1)
           this.shotShipPosition = 1;
+          }
         }else if(this.isShipShotedPosition%10 == 9){
-          this.checkComputerShot((this.isShipShotedPosition-1))
-          this.shotShipPosition = 0;  // prawo
+          if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
+            console.log('pudlo13')
+            // this.shotShipPosition = 0
+            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
+            this.checkComputerShot((this.isShipShotedPosition-1))
+            this.shotShipPosition = 0;  // prawo
+          }
         }else{
           if(angularMath.getIntegerRandomRange(0, 1) == 0){
             this.shotShipPosition = 0
             if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
+              console.log('pudlo14')
               this.shotShipPosition = 1
-              this.isShipShotedPosition++
+              // this.isShipShotedPosition++
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
+              this.computerShot();
             }else{
               if(this.playerBoard[this.isShipShotedPosition-1].status == 0){
+                console.log('pudlo15')
                 this.shotShipPosition = 1
                 // this.isShipShotedPosition = Math.max(...this.shotShipArray)
                 this.isShipShotedPositionCount.push(1)
+                console.log('tyle jest'+this.isShipShotedPositionCount)
                 console.log('this.computerShot();')
                 this.computerShot();
                 
               }else{
                 this.checkComputerShot(this.isShipShotedPosition-1)
                 if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                  console.log('pudlo16')
                   this.shotShipPosition = 1
                   this.isShipShotedPosition++
                   this.isShipShotedPositionCount.push(1)
+                  console.log('tyle jest'+this.isShipShotedPositionCount)
                 }
               }
             }
@@ -915,23 +982,30 @@ computerShot(){
           }else{
             this.shotShipPosition = 1
             if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
+              console.log('pudlo17')
               this.shotShipPosition = 0
-              this.isShipShotedPosition--
+              // this.isShipShotedPosition--
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
+              this.computerShot();
             }else{
               if(this.playerBoard[this.isShipShotedPosition+1].status == 0){
-                this.shotShipPosition = 0
+                console.log('pudlo18')
+                // this.shotShipPosition = 0
                 // this.isShipShotedPosition = Math.max(...this.shotShipArray)
                 this.isShipShotedPositionCount.push(1)
+                console.log('tyle jest'+this.isShipShotedPositionCount)
                 console.log('this.computerShot();')
                 this.computerShot();
                 
               }else{
                 this.checkComputerShot(this.isShipShotedPosition+1)
                 if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                  console.log('pudlo19')
                   this.shotShipPosition = 0
                   this.isShipShotedPosition--
                   this.isShipShotedPositionCount.push(1)
+                  console.log('tyle jest'+this.isShipShotedPositionCount)
                 }
               }
             }
@@ -942,32 +1016,61 @@ computerShot(){
         console.log("VERTICAL")
         this.shotShipDirection = shipDirection.VERTICAL;
         if(this.isShipShotedPosition-10 < 0){
-          this.checkComputerShot(this.isShipShotedPosition+10)
-          this.shotShipPosition = 1;
+          if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+            console.log('pudlo20')
+            // this.shotShipPosition = 0
+            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
+            this.checkComputerShot(this.isShipShotedPosition+10)
+            this.shotShipPosition = 1;
+          }
         }else if(this.isShipShotedPosition+10 > 100){
-          this.checkComputerShot((this.isShipShotedPosition-10))
-          this.shotShipPosition = 0;  // prawo
+          if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+            console.log('pudlo21')
+            // this.shotShipPosition = 0
+            // this.isShipShotedPosition = Math.max(...this.shotShipArray)
+            this.isShipShotedPositionCount.push(1)
+            console.log('tyle jest'+this.isShipShotedPositionCount)
+            console.log('this.computerShot();')
+            this.computerShot();
+            
+          }else{
+            this.checkComputerShot((this.isShipShotedPosition-10))
+            this.shotShipPosition = 0;  // prawo
+          }
         }else{
           if(angularMath.getIntegerRandomRange(0, 1) == 0){
             this.shotShipPosition = 0
             if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+              console.log('pudlo22')
               this.shotShipPosition = 1
-              this.isShipShotedPosition = this.isShipShotedPosition + 10
+              // this.isShipShotedPosition = this.isShipShotedPosition + 10
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
+              this.computerShot();
             }else{
               if(this.playerBoard[this.isShipShotedPosition-10].status == 0){
+                console.log('pudlo23')
                 this.shotShipPosition = 1
                 // this.isShipShotedPosition = Math.max(...this.shotShipArray)
                 this.isShipShotedPositionCount.push(1)
+                console.log('tyle jest'+this.isShipShotedPositionCount)
                 console.log('this.computerShot();')
                 this.computerShot();
                 
               }else{
                 this.checkComputerShot(this.isShipShotedPosition-10)
                 if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                  console.log('pudlo24')
                   this.shotShipPosition = 1
                   this.isShipShotedPosition = this.isShipShotedPosition + 10
                   this.isShipShotedPositionCount.push(1)
+                  console.log('tyle jest'+this.isShipShotedPositionCount)
                 }
               }
             }
@@ -976,23 +1079,30 @@ computerShot(){
           }else{
             this.shotShipPosition = 1
             if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+              console.log('pudlo25')
               this.shotShipPosition = 0
-              this.isShipShotedPosition = this.isShipShotedPosition - 10
+              // this.isShipShotedPosition = this.isShipShotedPosition - 10
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
+              this.computerShot();
             }
             if(this.playerBoard[this.isShipShotedPosition+10].status == 0){
+              console.log('pudlo26')
               this.shotShipPosition = 0
               // this.isShipShotedPosition = Math.max(...this.shotShipArray)
               this.isShipShotedPositionCount.push(1)
+              console.log('tyle jest'+this.isShipShotedPositionCount)
               console.log('this.computerShot();')
               this.computerShot();
               
             }else{
               this.checkComputerShot(this.isShipShotedPosition+10)
               if(this.playerBoard[this.isShipShotedPosition].status == 0){
+                console.log('pudlo27                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ')
                 this.shotShipPosition = 0
                 this.isShipShotedPosition = this.isShipShotedPosition - 10
                 this.isShipShotedPositionCount.push(1)
+                console.log('tyle jest'+this.isShipShotedPositionCount)
               }
             }
           }
@@ -1014,6 +1124,7 @@ computerShot(){
 
 }
 checkComputerShot(shot){
+  console.log('strzał: '+shot)
   var hitAndSink = 0;
     if(this.playerBoard[shot].status === shipStatus.NO_ACTION){
       if(this.playerBoard[shot].isShip){
@@ -1044,6 +1155,7 @@ checkComputerShot(shot){
             console.log('BOT: ' + this.shipsShotedByComputer + '/' + this.shipsInBoard.length)
             this.isShipShoted = false;
             this.isShipShotedPositionCount = [];
+            console.log('tyle jest'+this.isShipShotedPositionCount)
             this.shotShipArray = [];
             this.shotShipDirection = shipDirection.NOT_SET
           }else{
@@ -1068,14 +1180,17 @@ checkComputerShot(shot){
       }else{
         this.playerBoard[shot].status = shipStatus.MISS;
         this.computerHitStatus = "PUDŁO"
-        this.isShipShotedPosition = shot;
+        // this.isShipShotedPosition = shot;
       }
 
     }
 
     if(this.shipsShotedByComputer == this.shipsInBoard.length){
-      alert("BOT wygrał"); 
+      this.delay(500).then(any => {
+        alert("BOT wygrał"); 
       this.gameIsPending = false;
+    });
+      
       
       
     }
@@ -1098,19 +1213,22 @@ checkComputerShot(shot){
         if(hitAndSink == this.playerBoard[shot].positionOnBoard.length){
           this.computerHitStatus = "TRAFIONY ZATOPIONY"
           this.shipsShotedByComputer = this.shipsShotedByComputer + 1;
-          
+
           console.log('BOT: ' + this.shipsShotedByComputer + '/' + this.shipsInBoard.length)
           this.isShipShoted = false;
+          console.log(' ')
           
         }else{
           this.computerHitStatus = "TRAFIONY"
           // this.shotShipArray.push(shot)
           console.log(this.shotShipArray)
           this.isShipShoted = true;
+          console.log(' ')
         }
       }else{
         this.playerBoard[shot].status = shipStatus.MISS;
         this.computerHitStatus = "PUDŁO"
+        console.log(' ')
       }
       if(this.shipsShotedByComputer == this.shipsInBoard.length){
         alert("BOT wygrał"); 
