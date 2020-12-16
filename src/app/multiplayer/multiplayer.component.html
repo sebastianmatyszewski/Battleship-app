@@ -1,3 +1,188 @@
-<button *ngIf="!gameStarted" type="button" (click)="startgame()" class="btn btn-success">Rozpocznij grę!</button>
+<!-- 
+@author Shashank Tiwari 
+Multiplayer Tic-Tac-Toe Game using Angular, Nodejs 
+-->
 
-<button *ngIf="gameStarted" type="button" class="btn btn-success">Gra rozpoczęta</button>
+<!-- A Play Ground, where User can with each other starts  -->
+<div class="container">
+  <div class="row heading-row">
+    <div class="col-md-12 text-center app-heading">
+      <h2>{{title}}</h2>
+    </div>
+    <div class="col-md-6 text-center">
+      <div class="player-heading" [class.current-player]="myTurn">
+       {{meNickname}}
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <div class="player-heading" [class.current-player]="!myTurn">
+        {{enemyNickname}}
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row game-row">
+    <div class="text-center game-container">
+      <table id="game" class="game-grid" #game>
+        {{gameGrid}}
+        <tr *ngFor="let iterationNumber of gameGrid">
+          {{iterationNumber}}          <td *ngFor="let number of iterationNumber" class="grid-{{number}}" id="grid{{number}}" (click)="play(number)">
+            {{ renderPlayedText(number)}}
+          </td>
+        </tr>
+      </table>
+      <br />
+      <h6 class="text-center">You are in Room Number {{roomNumber}}.</h6>
+    </div>
+  </div> -->
+  
+  <!-- <div class="row game-row">
+    <div class="text-center game-container">
+      <table id="game" class="game-grid" #game>
+        {{gameGrid}}
+        <tr *ngFor="let iterationNumber of gameGrid">
+          {{iterationNumber}}          <td *ngFor="let number of iterationNumber" class="grid-{{number}}" id="grid{{number}}" (click)="play(number)">
+            {{ renderPlayedText(number)}}
+          </td>
+        </tr>
+      </table>
+      <br />
+      <h6 class="text-center">You are in Room Number {{roomNumber}}.</h6>
+    </div>
+  </div> -->
+  <div class="container" *ngIf="gameIsPending">
+    <div class="row">
+      <div class="col player-board">
+        <div class="row">
+          <div class="col board-letters"></div>
+          <div class="col board-letters">A</div>
+          <div class="col board-letters">B</div>
+          <div class="col board-letters">C</div>
+          <div class="col board-letters">D</div>
+          <div class="col board-letters">E</div>
+          <div class="col board-letters">F</div>
+          <div class="col board-letters">G</div>
+          <div class="col board-letters">H</div>
+          <div class="col board-letters">I</div>
+          <div class="col board-letters">J</div>
+        </div>
+        <ng-container *ngFor="let number of array(10), let i = index">
+          <div class="row">
+            <div class="col board-numbers">{{i+1}}</div>
+            <ng-container *ngFor="let number of array(10), let j = index">
+              <div class="col cell-size"
+              [class.player-board-ship-true] = "myBoard[i*10 + j].isShip === true"
+              [class.player-board-ship-false] = "myBoard[i*10 + j].isShip === false"
+              [class.computer-board-ship-hit] = "myBoard[i*10 + j].status == 1"
+              [class.computer-board-ship-miss] = "myBoard[i*10 + j].status == 0"
+              > {{myBoard[i*10 + j].index}}</div>
+            </ng-container>
+          </div>
+        </ng-container>	
+        <div class="row">
+          
+          <div class="col board-status">{{computerHitStatus}}</div>
+        </div>
+      </div>	
+      <div class="col player-board">
+        <div class="row">
+          <div class="col board-letters"></div>
+          <div class="col board-letters">A</div>
+          <div class="col board-letters">B</div>
+          <div class="col board-letters">C</div>
+          <div class="col board-letters">D</div>
+          <div class="col board-letters">E</div>
+          <div class="col board-letters">F</div>
+          <div class="col board-letters">G</div>
+          <div class="col board-letters">H</div>
+          <div class="col board-letters">I</div>
+          <div class="col board-letters">J</div>
+        </div>
+        <ng-container *ngFor="let number of array(10), let i = index">
+          <div class="row">
+            <div class="col board-numbers">{{i+1}}</div>
+            <ng-container *ngFor="let number of array(10), let j = index">
+              <div class="col cell-size"
+              
+              [class.player-board-ship-false] = "enemyBoard[i*10 + j].isShip === false"
+              [class.computer-board-ship-hit] = "enemyBoard[i*10 + j].status == 1"
+              [class.computer-board-ship-miss] = "enemyBoard[i*10 + j].status == 0"
+              (click)="shot(enemyBoard[i*10+j])"
+              > {{enemyBoard[i*10 + j].index}}</div>
+            </ng-container>
+          </div>
+        </ng-container>	
+        <div class="row">
+          
+          <div class="col board-status">{{computerHitStatus}}</div>
+        </div>
+      </div>	
+  
+    </div>
+  </div>
+
+  <!-- <div *ngFor="let iterationNumber of gameGrid">
+    <div class="row">
+      <div *ngFor="let number of iterationNumber" class="grid-{{number}}" id="grid{{number}}" (click)="play(number)">
+        {{ renderPlayedText(number)}}
+      </div>
+    </div>
+  </div>" -->
+
+
+  <!-- <ng-container *ngFor="let number of array(10), let i = index">
+    <div class="row">
+      <div class="col board-numbers">{{i+1}}</div>
+      <ng-container *ngFor="let number of array(10), let j = index">
+        <div class="col cell-size"
+        [class.player-board-ship-true] = "playerBoard[i*10 + j].isShip === true"
+        [class.player-board-ship-false] = "playerBoard[i*10 + j].isShip === false"
+        [class.computer-board-ship-hit] = "playerBoard[i*10 + j].status == 1"
+        [class.computer-board-ship-miss] = "playerBoard[i*10 + j].status == 0"
+        > {{playerBoard[i*10 + j].index}}</div>
+      </ng-container>
+    </div>
+  </ng-container>	 -->
+
+
+</div>
+<!-- A Play Ground, where User can with each other ends  -->
+
+
+
+<!-- Modal to create and select Rooms starts -->
+<ng-template #content>
+  <div class="modal-header">
+    <span>Total Rooms :{{totalRooms}}</span>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="join-game" [hidden]="roomNumber > 0 ? true :false">
+        <div class="room-list">
+          <h6 class="text-center">Available Rooms to Join</h6>
+          <ul class="nav nav-pills">
+            <li class="nav-item room-number" *ngFor="let number of emptyRooms">
+              <a class="nav-link active" title="Join room Number {{number}}" (click)="joinRoom(number)">#{{number}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="create-room text-center">
+          <h5>
+            <span>OR</span>
+          </h5>
+          <button class="btn btn-primary" (click)="createRoom()"> Create New Room</button>
+        </div>
+      </div>
+      <br>
+      <div class="player-waitng" [hidden]="roomNumber > 0 ? false :true">
+        <h2 class="text-center">Waiting for player to join</h2>
+        <br />
+        <img class="game-loader" src="assets/img/loader.gif">
+        <br />
+        <br />
+        <h6 class="text-center">You are in Room Number {{roomNumber}}, Tell your friend to join Room Number
+          {{roomNumber}}</h6>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Modal to create and select Rooms ends -->
