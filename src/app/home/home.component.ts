@@ -9,9 +9,9 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  user: any;
-  auth: any;
-  isLoggedIn = false;
+  private user: any;
+  private auth: any;
+  public isLoggedIn: Boolean = false;
 
   constructor(private authService: AuthService,
               private router: Router) {
@@ -29,42 +29,20 @@ export class HomeComponent implements OnInit {
     else{
       this.isLoggedIn = false;
     }
-    
-    // this.auth.isLoading=true;
-    // this.authService.getUserState().then(
 
-    //   this.user = this.authService.user,
-      
-    // // console.log(this.user)
-    // // console.log(this.auth.user),
-    // )
-      // .subscribe(user =>{
-    
-    
-      // })
   }
 
-  klik(){
-    // this.user = this.authService.user;
-    // console.log(this.user)
-    // console.log(this.authService.user)
-  }
-
-
-  login(){
+  private login(){
     this.router.navigate(['/login']);
   }
-  register(){
+  private register(){
     this.router.navigate(['/register']);
   }
-  singleplayer(){
+  private singleplayer(){
     this.router.navigate(['/singleplayer']);
   }
-  multiplayer(){
+  private multiplayer(){
     this.router.navigate(['/multiplayer']);
-  }
-  logout(){
-    this.authService.logout();
   }
 
 }

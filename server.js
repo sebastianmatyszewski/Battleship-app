@@ -35,23 +35,18 @@ class Server{
         );
     }
 
-    /* Including app Routes starts*/
     includeRoutes(){
         new routes(this.app,redisDB).routesConfig();
         new socketEvents(this.socket,redisDB).socketConfig();
     }
-    /* Including app Routes ends*/  
 
     appExecute(){
-
         this.appConfig();
         this.includeRoutes();
-
         this.http.listen(this.port, this.host, () => {
             console.log(`Listening on http://${this.host}:${this.port}`);
         });
     }
-
 }
 
 const app = new Server();

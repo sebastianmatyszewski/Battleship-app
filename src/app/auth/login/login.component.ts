@@ -9,12 +9,15 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  authError: any;
-  isLoggedIn = false;
+  public authError: any;
+  public isLoggedIn = false;
   constructor(private auth: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.auth.authError$.subscribe(data =>{
+      this.authError = data;
+    })
     if(localStorage.getItem('user')!== null){
       this.isLoggedIn = true;
       this.router.navigate(['/home'])
@@ -22,8 +25,6 @@ export class LoginComponent implements OnInit {
     else{
       this.isLoggedIn = false;
     }
-    
-      
   }
 
   async signin(frm){

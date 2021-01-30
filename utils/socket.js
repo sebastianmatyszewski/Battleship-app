@@ -3,48 +3,35 @@
 * Multiplayer Tic-Tac-Toe Game using Angular, Nodejs
 */
 'use strict';
- 
+
+
 class Socket{
- 
+    roomStats = []
+    player1Board = null
+    player2Board = null
     constructor(socket,redisDB){
         this.io = socket;
         this.redisDB = redisDB;
-        /* Win combination to check winner of the Game.*/
-        this.winCombination = [
-            [1, 2, 3], [4, 5, 6], [7, 8, 9],
-            [1, 4, 7], [2, 5, 8], [3, 6, 9],
-            [1, 5, 9], [7, 5, 3]
-        ];
- 
-        /* Inserting the values into the radis Database start */
         redisDB.set("totalRoomCount", 1);
         redisDB.set("allRooms", JSON.stringify({
             emptyRooms: [1],
             fullRooms : []
         }));
-        /* Inserting the values into the radis Database ends */
     }
     
-    socketEvents(){
+    socketEvents(){   
         const IO = this.io;
         const redisDB = this.redisDB;
         let allRooms = null;
         let totalRoomCount = null;
- 
         IO.on('connection', (socket) => {
- 
             socket.setMaxListeners(20); /* Setting Maximum listeners */
- 
-            /*
-            * In this Event user will create a new Room and can ask someone to join.
-            */
             socket.on('create-room', (data) => {
                 Promise.all(['totalRoomCount','allRooms'].map(key => redisDB.getAsync(key))).then(values => {
                     const allRooms = JSON.parse(values[1]);
                     let totalRoomCount = values[0];
                     let fullRooms = allRooms['fullRooms'];
                     let emptyRooms = allRooms['emptyRooms'];
-                    /*Checking the if the room is empty.*/
                     let isIncludes = emptyRooms.includes(totalRoomCount);
                     if(!isIncludes){
                         totalRoomCount++;
@@ -55,7 +42,15 @@ class Socket{
                             emptyRooms: emptyRooms,
                             fullRooms : fullRooms
                         }));
-                        IO.emit('rooms-available', {
+                        this.roomStats[totalRoomCount] = {
+                            'player1' : data.player1,
+                            'player2' : null,
+                            'player1Board': data.player1Board,
+                            'player2Board': data.player2Board,
+                            'shipsShotedByPlayer1' : null,
+                            'shipsShotedByPlayer2' : null,
+                        }
+                        IO.emit('rooms-availalbe', {
                             'totalRoomCount' : totalRoomCount,
                             'fullRooms' : fullRooms,
                             'emptyRooms': emptyRooms
@@ -69,10 +64,6 @@ class Socket{
                     }
                 });
             });
- 
-            /*
-            * In this event will user can join the selected room
-            */
             socket.on('join-room', (data) => {
                 const roomNumber = data.roomNumber;
                 Promise.all(['totalRoomCount','allRooms'].map(key => redisDB.getAsync(key))).then(values => {
@@ -85,20 +76,23 @@ class Socket{
                         emptyRooms.splice(indexPos,1);
                         fullRooms.push(roomNumber);
                     }
-                    /* User Joining socket room */
                     socket.join("room-"+roomNumber);
                     redisDB.set("allRooms", JSON.stringify({
                         emptyRooms: emptyRooms,
                         fullRooms : fullRooms
                     }));
-                    /* Getting the room number from socket */
                     const currentRoom = (Object.keys(IO.sockets.adapter.sids[socket.id]).filter(item => item!=socket.id)[0]).split('-')[1];
                     IO.emit('rooms-available', {
                         'totalRoomCount' : totalRoomCount,
                         'fullRooms' : fullRooms,
                         'emptyRooms': emptyRooms
                     });
+                    this.roomStats[roomNumber].player2 = data.player2;
                     IO.sockets.in("room-"+roomNumber).emit('start-game', {
+                        'player1Board': this.roomStats[roomNumber].player1Board,
+                        'player2Board': this.roomStats[roomNumber].player2Board,
+                        'player1' : this.roomStats[roomNumber].player1,
+                        'player2' : this.roomStats[roomNumber].player2,
                         'totalRoomCount' : totalRoomCount,
                         'fullRooms' : fullRooms,
                         'emptyRooms': emptyRooms,
@@ -106,49 +100,70 @@ class Socket{
                     });
                 });
             });
- 
-            /*
-            * This event will send played moves between the users
-            * Also Here we will calaculate the winner.
-            */
-            socket.on('send-move', (data) => {
-                const playedGameGrid = data.playedGameGrid;
-                const movesPlayed = data.movesPlayed;
+            socket.on('send-boards', (data) => {
                 const roomNumber = data.roomNumber;
-                let winner = null;
-                /* checking the winner */
-                this.winCombination.forEach(singleCombination => {
-                    if (playedGameGrid[singleCombination[0]] !== undefined && playedGameGrid[singleCombination[0]] !== null &&
-                        playedGameGrid[singleCombination[1]] !== undefined && playedGameGrid[singleCombination[1]] !== null && 
-                        playedGameGrid[singleCombination[2]] !== undefined && playedGameGrid[singleCombination[2]] !== null && 
-                        playedGameGrid[singleCombination[0]]['player'] === playedGameGrid[singleCombination[1]]['player'] &&
-                        playedGameGrid[singleCombination[1]]['player'] === playedGameGrid[singleCombination[2]]['player']
-                    ) {
-                        winner = playedGameGrid[singleCombination[0]]['player'] + ' Wins !';
-                    } else if (movesPlayed === 9) {
-                        winner = 'Game Draw';
-                    }
-                    return false;
+                socket.broadcast.to("room-"+roomNumber).emit('receive-boards', {
+                    'broadcast' : 'wszystcy dołączyli do gry',
+                    'player1Board' : this.roomStats[roomNumber].player1Board,
+                    'player2Board' : this.roomStats[roomNumber].player2Board,
+                    'player1' : this.roomStats[roomNumber].player1,
+                    'player2' : this.roomStats[roomNumber].player2,
+     
                 });
+            });
+            socket.on('send-move', (data) => {
+                console.log(" ")
+                console.log("Nowa Runda")
+                const roomNumber = data.roomNumber;
+                const enemyBoard = data.enemyBoard;
+                const playerShot = data.playerShot;
+                console.log("roomNumber"+roomNumber)
+                console.log("playerShot"+playerShot)
+                const turn = data.turn;
+                console.log("turn"+turn)
+                let winner = null;
+                if(playerShot.isShip === true){
+                    enemyBoard[playerShot.index].status = 1;
+                    var hitAndSink = 0;
+                    for(let i = 0; i<enemyBoard[playerShot.index].positionOnBoard.length; i++){
+                        hitAndSink = hitAndSink + enemyBoard[enemyBoard[playerShot.index].positionOnBoard[i]].status;
+                    }
+                    
+                    if(hitAndSink == enemyBoard[playerShot.index].positionOnBoard.length){
+                        if(this.roomStats[roomNumber].player1 == turn){
+                            this.roomStats[roomNumber].shipsShotedByPlayer1 = this.roomStats[roomNumber].shipsShotedByPlayer1 + 1
+                        }
+                        else{
+                            this.roomStats[roomNumber].shipsShotedByPlayer2 = this.roomStats[roomNumber].shipsShotedByPlayer2 + 1
+                        }
+                        console.log("trafien gracza 1"+this.roomStats[roomNumber].shipsShotedByPlayer1)
+                        console.log("trafien gracza 2"+this.roomStats[roomNumber].shipsShotedByPlayer2)
+                    }
+                }else{
+                    enemyBoard[playerShot.index].status = 0;               
+                }
+                if(this.roomStats[roomNumber].shipsShotedByPlayer1 == 8 || this.roomStats[roomNumber].shipsShotedByPlayer2 == 8){
+                    winner=this.roomStats[roomNumber].turn + 'wins'
+                    console.log("winner" + winner)
+                }
                 if(winner === null){
-                    socket.broadcast.to("room-"+roomNumber).emit('receive-move', {
-                        'position' : data.position,
-                        'playedText' : data.playedText,
-                        'winner' : null
+                    IO.sockets.in("room-"+roomNumber).emit('receive-move', {
+                        'winner' : null,
+                        'turn' : turn,
+                        'player1' : data.player1,
+                        'player2' : data.player2,
+                        'roomNumber': roomNumber,
+                        'myBoard': data.myBoard,
+                        'enemyBoard': enemyBoard,
                     });
                 }else{
                     IO.sockets.in("room-"+roomNumber).emit('receive-move', {
                         'position' : data.position,
                         'playedText' : data.playedText,
-                        'winner' : winner
+                        'winner' : data.turn + ' wygrał!',
                     });
                 }
             });
- 
-            /*
-            * Here we will remove the room number from fullrooms array 
-            * And we will update teh Redis DB keys.
-            */
             socket.on('disconnecting',()=>{
                 const rooms = Object.keys(socket.rooms);
                 const roomNumber = ( rooms[1] !== undefined && rooms[1] !== null) ? (rooms[1]).split('-')[1] : null;
@@ -175,9 +190,9 @@ class Socket{
                         }));
                         IO.sockets.in("room-"+roomNumber).emit('room-disconnect', {id: socket.id});    
                     });
-                }//if ends
+                }
             });
- 
+
         });
     }
     

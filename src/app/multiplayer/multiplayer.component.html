@@ -1,9 +1,4 @@
-<!-- 
-@author Shashank Tiwari 
-Multiplayer Tic-Tac-Toe Game using Angular, Nodejs 
--->
-
-<!-- A Play Ground, where User can with each other starts  -->
+<div class="bg-image"></div>
 <div class="container">
   <div class="row heading-row">
     <div class="col-md-12 text-center app-heading">
@@ -20,35 +15,6 @@ Multiplayer Tic-Tac-Toe Game using Angular, Nodejs
       </div>
     </div>
   </div>
-  <!-- <div class="row game-row">
-    <div class="text-center game-container">
-      <table id="game" class="game-grid" #game>
-        {{gameGrid}}
-        <tr *ngFor="let iterationNumber of gameGrid">
-          {{iterationNumber}}          <td *ngFor="let number of iterationNumber" class="grid-{{number}}" id="grid{{number}}" (click)="play(number)">
-            {{ renderPlayedText(number)}}
-          </td>
-        </tr>
-      </table>
-      <br />
-      <h6 class="text-center">You are in Room Number {{roomNumber}}.</h6>
-    </div>
-  </div> -->
-  
-  <!-- <div class="row game-row">
-    <div class="text-center game-container">
-      <table id="game" class="game-grid" #game>
-        {{gameGrid}}
-        <tr *ngFor="let iterationNumber of gameGrid">
-          {{iterationNumber}}          <td *ngFor="let number of iterationNumber" class="grid-{{number}}" id="grid{{number}}" (click)="play(number)">
-            {{ renderPlayedText(number)}}
-          </td>
-        </tr>
-      </table>
-      <br />
-      <h6 class="text-center">You are in Room Number {{roomNumber}}.</h6>
-    </div>
-  </div> -->
   <div class="container" *ngIf="gameIsPending">
     <div class="row">
       <div class="col player-board">
@@ -119,46 +85,17 @@ Multiplayer Tic-Tac-Toe Game using Angular, Nodejs
   
     </div>
   </div>
-
-  <!-- <div *ngFor="let iterationNumber of gameGrid">
-    <div class="row">
-      <div *ngFor="let number of iterationNumber" class="grid-{{number}}" id="grid{{number}}" (click)="play(number)">
-        {{ renderPlayedText(number)}}
-      </div>
-    </div>
-  </div>" -->
-
-
-  <!-- <ng-container *ngFor="let number of array(10), let i = index">
-    <div class="row">
-      <div class="col board-numbers">{{i+1}}</div>
-      <ng-container *ngFor="let number of array(10), let j = index">
-        <div class="col cell-size"
-        [class.player-board-ship-true] = "playerBoard[i*10 + j].isShip === true"
-        [class.player-board-ship-false] = "playerBoard[i*10 + j].isShip === false"
-        [class.computer-board-ship-hit] = "playerBoard[i*10 + j].status == 1"
-        [class.computer-board-ship-miss] = "playerBoard[i*10 + j].status == 0"
-        > {{playerBoard[i*10 + j].index}}</div>
-      </ng-container>
-    </div>
-  </ng-container>	 -->
-
-
 </div>
-<!-- A Play Ground, where User can with each other ends  -->
-
-
-
-<!-- Modal to create and select Rooms starts -->
 <ng-template #content>
   <div class="modal-header">
-    <span>Total Rooms :{{totalRooms}}</span>
+    <span>Dostępne pokoje :{{totalRooms}}</span>
+    <button class="nav-link" (click)="goHome()">Powrót do strony głównej</button>
   </div>
   <div class="modal-body">
     <div class="container">
       <div class="join-game" [hidden]="roomNumber > 0 ? true :false">
         <div class="room-list">
-          <h6 class="text-center">Available Rooms to Join</h6>
+          <h6 class="text-center">Dostępne pokoje</h6>
           <ul class="nav nav-pills">
             <li class="nav-item room-number" *ngFor="let number of emptyRooms">
               <a class="nav-link active" title="Join room Number {{number}}" (click)="joinRoom(number)">#{{number}}</a>
@@ -167,22 +104,21 @@ Multiplayer Tic-Tac-Toe Game using Angular, Nodejs
         </div>
         <div class="create-room text-center">
           <h5>
-            <span>OR</span>
+            <span>LUB</span>
           </h5>
-          <button class="btn btn-primary" (click)="createRoom()"> Create New Room</button>
+          <button class="btn btn-primary" (click)="createRoom()"> Utwórz nowy pokój</button>
         </div>
       </div>
       <br>
       <div class="player-waitng" [hidden]="roomNumber > 0 ? false :true">
-        <h2 class="text-center">Waiting for player to join</h2>
+        <h2 class="text-center">Oczekiwanie na drugiego gracza</h2>
         <br />
         <img class="game-loader" src="assets/img/loader.gif">
         <br />
         <br />
-        <h6 class="text-center">You are in Room Number {{roomNumber}}, Tell your friend to join Room Number
+        <h6 class="text-center">Utworzyłeś nowy pokój {{roomNumber}}
           {{roomNumber}}</h6>
       </div>
     </div>
   </div>
 </ng-template>
-<!-- Modal to create and select Rooms ends -->

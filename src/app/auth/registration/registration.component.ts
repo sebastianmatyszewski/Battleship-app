@@ -9,12 +9,15 @@ import { AuthService } from '../auth.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  authError: any;
-  isLoggedIn = false;
+  public authError: any;
+  public isLoggedIn = false;
   constructor(private auth: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.auth.authError$.subscribe(data =>{
+      this.authError = data;
+    })
     if(localStorage.getItem('user')!== null){
       this.isLoggedIn = true;
       this.router.navigate(['/home'])
@@ -25,15 +28,11 @@ export class RegistrationComponent implements OnInit {
     }
     
   }
-
-
+  
   async signup(frm){
     await this.auth.signup(frm.value)
     if(this.auth.isLoggedIn){
       this.isLoggedIn = true;
     }
   }
-
-
-
 }

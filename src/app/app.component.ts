@@ -9,15 +9,9 @@ import { AuthService } from './auth/auth.service';
 })
 
 export class AppComponent {
-  auth: any;
+  private auth: any;
   title = 'Battleship-app';
   constructor(private authService: AuthService) {
     this.auth = authService;
   }
-  
-handleLogout(){
-  
-}
-
-
 }

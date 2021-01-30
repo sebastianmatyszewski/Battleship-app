@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +9,8 @@ import * as firebase from 'firebase';
 })
 export class NavbarComponent implements OnInit {
 
-  user: any;
-  isLoggedIn: any;
+  private user: any;
+  public isLoggedIn: any;
 
   constructor(
               private authService: AuthService,
@@ -39,7 +38,7 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = false;
     }
   }
-    ngOnChanges() {
+    private ngOnChanges() {
       this.authService.getEmitter().subscribe((isLogged) => { 
         console.log('Odpalam navbar')
         console.log("Component is notified of successfull login!"); 
@@ -52,42 +51,9 @@ export class NavbarComponent implements OnInit {
           this.isLoggedIn = false;
         }
       }); 
-    
-    
-    
-    // var user = firebase.auth().currentUser;
-    // console.log(user)
-    // firebase.auth().onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     console.log(user)
-    //   } else {
-    //     console.log("niezalogowany")
-    //   }
-    // });
-    // this.auth.
-
-
-
-//     this.authService.getUserState().then(
-//       this.user = this.authService.user,
-// )
-
-
-        // if (this.authService.user) {
-        //   console.log("zalogowany")
-        //     console.log(this.authService.user)
-        //   } else {
-        //     console.log("niezalogowany")
-        //   }
-    
-      // .subscribe(user =>{
-        
-      // })
-      
   }
 
-
-  logout(){
+  private logout(){
     this.authService.logout();
     console.log('wyloguj')
   }
