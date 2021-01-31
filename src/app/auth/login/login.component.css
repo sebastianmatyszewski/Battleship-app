@@ -1,0 +1,100 @@
+body, html {
+    height: 100%;
+  }
+  
+.content{
+    /* background-color: blue; */
+    padding: 5px;
+    background-color: rgba(2, 0, 0, 0.616);
+    filter: alpha(opacity=50);
+}   
+  
+  .bg-image {
+
+    background-position: center;
+    background-repeat: no-repeat;
+    width:100%;  
+    height:100%; 
+    background-size: cover;  
+    -moz-background-size: cover;  
+    -o-background-size: cover;
+    background-attachment: fixed;
+    position: fixed;
+    background-image: url("/assets/mapa3.png");
+    /* -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px); */
+      
+  }
+  .bg-text {
+    transform: translate(0, 0);
+    z-index: 2;
+    text-align: center;
+  }
+
+
+.container{
+height: 100%;
+align-content: center;
+}
+.card-header{
+    background-color: rgba(0,0,0,0.3) !important;
+}
+.card{
+height: 300px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.6) !important;
+}
+
+
+.card-header h3{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+
+.login_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+color: #FFC312;
+}
+
+.alert-message{
+    color: rgb(247, 121, 121);
+}

@@ -1,35 +1,77 @@
-<div class="row">
-    <div class="col-12">
+<div class="bg-image"></div>
+
+<div class="container mt-5">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Logowanie</h3>
+			</div>
+			<div class="card-body">
+				<form #loginForm="ngForm" (ngSubmit)="signin(loginForm)">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+            <!-- <input type="text" class="form-control" placeholder="Adres email"> -->
+            <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Adres email">
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+            <!-- <input type="password" class="form-control" placeholder="Hasło"> -->
+            <input ngModel #password="ngModel" name="password" type="password" class="form-control" placeholder="Hasło">
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Zaloguj" class="btn float-right login_btn">
+          </div>
+          
+				</form><div class="row" *ngIf="authError">
+            <div class="col-12 alert-message">{{ authError?.message }}</div>
+          </div>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					Nie masz jeszcze konta?<a class="links-a" href="/register"><b>Zarejestruj się</b></a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+  <!-- <div class="row d-flex justify-content-center mt-5 ">
+    <div class="col-3 d-flex justify-content-center content">
       <form #loginForm="ngForm" (ngSubmit)="signin(loginForm)">
-  
+
         <div class="row" *ngIf="authError">
           <div class="col-12 alert alert-danger">{{ authError?.message }}</div>
         </div>
-  
+
         <div class="row">
           <div class="col-12">
             <label for="email">Email</label>
             <input ngModel #email="ngModel" name="email" type="email" class="form-control">
           </div>
         </div>
-  
+
         <div class="row">
           <div class="col-12">
             <label for="password">Password</label>
             <input ngModel #password="ngModel" name="password" type="password" class="form-control">
           </div>
         </div>
-  
+
         <div class="row mt-2">
           <div class="col-12">
             <a href="/register">Click here to register</a>
           </div>
-  
+
           <div class="col-12">
             <button class="btn btn-primary" type="submit">Login</button>
           </div>
         </div>
-  
+
       </form>
     </div>
-  </div>
+  </div> -->
