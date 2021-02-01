@@ -96,7 +96,6 @@ export class MultiplayerComponent {
   }
 
   private opponentMove(response) {
-    console.log(response)
     if (response['winner'] === null) {
       if(response.turn == JSON.parse(localStorage.getItem("user")).displayName){
         this.myBoard = response.myBoard

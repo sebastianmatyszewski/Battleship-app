@@ -18,12 +18,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getEmitter().subscribe((isLogged) => { 
-      console.log('Odpalam navbar')
-      console.log("Component is notified of successfull login!"); 
       if(localStorage.getItem('user')!== null){
         this.isLoggedIn = true;
         this.user = JSON.parse(localStorage.getItem("user"));
-        console.log(this.user)
       }
       else{
         this.isLoggedIn = false;
@@ -32,7 +29,6 @@ export class NavbarComponent implements OnInit {
     if(localStorage.getItem('user')!== null){
       this.isLoggedIn = true;
       this.user = JSON.parse(localStorage.getItem("user"));
-      console.log(this.user)
     }
     else{
       this.isLoggedIn = false;
@@ -40,12 +36,9 @@ export class NavbarComponent implements OnInit {
   }
     private ngOnChanges() {
       this.authService.getEmitter().subscribe((isLogged) => { 
-        console.log('Odpalam navbar')
-        console.log("Component is notified of successfull login!"); 
         if(localStorage.getItem('user')!== null){
           this.isLoggedIn = true;
           this.user = JSON.parse(localStorage.getItem("user"));
-          console.log(this.user)
         }
         else{
           this.isLoggedIn = false;
@@ -55,7 +48,6 @@ export class NavbarComponent implements OnInit {
 
   private logout(){
     this.authService.logout();
-    console.log('wyloguj')
   }
 
 }

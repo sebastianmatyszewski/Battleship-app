@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
     })
     if(localStorage.getItem('user')!== null){
       this.isLoggedIn = true;
+      
       this.router.navigate(['/home'])
     }
     

@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 
   async signin(frm){
     await this.auth.signin(frm.value.email, frm.value.password)
-    console.log('logowanie')
     if(this.auth.isLoggedIn){
       this.isLoggedIn = true;
     }

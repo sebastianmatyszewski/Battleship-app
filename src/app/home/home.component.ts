@@ -19,11 +19,9 @@ export class HomeComponent implements OnInit {
                }
 
   ngOnInit(): void {
-    console.log('Odpalam home')
     if(localStorage.getItem('user')!== null){
       this.isLoggedIn = true;
       this.user = JSON.parse(localStorage.getItem("user"));
-      console.log(this.user)
     }
     
     else{
