@@ -25,7 +25,7 @@ body, html {
 
   
   .bg-image {
-
+    z-index: -1;
     background-position: center;
     background-repeat: no-repeat;
     width:100%;  
@@ -33,9 +33,8 @@ body, html {
     background-size: cover;  
     -moz-background-size: cover;  
     -o-background-size: cover;
-    background-attachment: fixed;
     position: fixed;
-    background-image: url("/assets/mapa3.png");
+    background-image: url("/assets/mapa_skarbow_brazowy.png");
     /* -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
     -o-filter: blur(2px);
@@ -56,3 +55,46 @@ body, html {
 .button:hover {
   background-color: rgba(212, 41, 41, 0.5) !important;
 }
+
+.gameModeText{
+  font-family: 'Potta One', cursive;
+  /* font-size: 30px; */
+  margin-top: 10px;
+}
+
+.container{
+  z-index: 100;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.danger{
+  margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+  margin-top: 10%;
+  margin-bottom: auto;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 40px;
+  /* color: rgb(44, 43, 43); */
+  /* color:rgb(46, 36, 32); */
+  color: rgb(211, 198, 169);
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+
+  width: 50rem;
+  height: 39rem;
+  background-color: rgba(0,0,0,0.6) !important;
+}
+
+
+
+.row {
+  text-align: center;
+}
+
+

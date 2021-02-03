@@ -18,9 +18,9 @@ body, html {
     background-size: cover;  
     -moz-background-size: cover;  
     -o-background-size: cover;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     position: fixed;
-    background-image: url("/assets/mapa3.png");
+    background-image: url("/assets/mapa_skarbow_brazowy.png");
     /* -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
     -o-filter: blur(2px);
@@ -40,14 +40,17 @@ height: 100%;
 align-content: center;
 }
 .card-header{
-    background-color: rgba(0,0,0,0.3) !important;
+    background-color: rgba(0,0,0,0.4) !important;
+}
+.card-footer{
+  background-color: rgba(0,0,0,0.2) !important;
 }
 .card{
 height: 300px;
-margin-top: auto;
+margin-top: 10%;
 margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.6) !important;
+background-color: rgba(0,0,0,0.7) !important;
 }
 
 

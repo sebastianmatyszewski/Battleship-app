@@ -7,7 +7,6 @@
   background-size: cover;  
   -moz-background-size: cover;  
   -o-background-size: cover;
-  background-attachment: fixed;
   position: fixed;
   background-image: url("/assets/mapa3.png");
   /* -webkit-filter: blur(2px);

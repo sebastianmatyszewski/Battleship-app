@@ -72,6 +72,7 @@
               [class.player-board-ship-false] = "enemyBoard[i*10 + j].isShip === false"
               [class.computer-board-ship-hit] = "enemyBoard[i*10 + j].status == 1"
               [class.computer-board-ship-miss] = "enemyBoard[i*10 + j].status == 0"
+              [class.computer-board-ship-noaction]="enemyBoard[i*10 + j].status == 2"
               (click)="shot(enemyBoard[i*10+j])"
               > {{enemyBoard[i*10 + j].index}}</div>
             </ng-container>

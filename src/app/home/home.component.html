@@ -1,36 +1,30 @@
-
 <div class="bg-image"></div>
 
-<div class="bg-text">
-    <p *ngIf="isLoggedIn">Ahoj {{user?.displayName}}, wybierz tryb gry!</p>
-
-
-
-    <button class="btn btn-primaty mr-2" *ngIf="!isLoggedIn" (click)="register()">Zarejestruj się!</button>
-    <button class="btn btn-primaty" *ngIf="!isLoggedIn" (click)="login()">Zaloguj się się!</button>
+<div>
     <div *ngIf="isLoggedIn">
-
-
+        <p class="gameModeText h1" *ngIf="isLoggedIn">Ahoj {{user?.displayName}}!</p>
+        <p class="gameModeText h4" *ngIf="isLoggedIn">Wybierz tryb gry!</p>
         <button class="button"><img class="img-responsive" src="assets/bot2.png" (click)="singleplayer()"></button>
         <button class="button"><img class="img-responsive" src="assets/pirates.png" (click)="multiplayer()"></button>
     </div>
-</div>
+    <div class="container" *ngIf="!isLoggedIn">
+        <div class="card" >
+            <p>Zostań piratem <br> i wyrusz w świat pełen przygód.</p>
+            <img class="danger" src="assets/danger.png" alt="Girl in a jacket" width="225" height="150">
+            Zmierz się z innymi graczami
+            i pokaż innym
+            <p>KTO TU RZĄDZI!</p>
 
-<!-- <body>
+                <div>
+                    <button type="button" class="btn btn-lg btn-warning" (click)="register()">Zarejestruj się już teraz!</button>
+                </div>
+                    <span>lub</span>
+                <div>
+                    <button type="button" class="btn btn-lg btn-warning" (click)="login()">Zaloguj się do gry!</button>
+                </div>
+                
 
-    <div class="bg">
-        <p>home works!</p>
-        <p *ngIf="isLoggedIn">Zalogowany jako: {{user?.email}} {{user?.displayName}}</p>
-
-
-
-        <button class="btn btn-primaty mr-2" *ngIf="!isLoggedIn" (click)="register()">Zarejestruj się!</button>
-        <button class="btn btn-primaty" *ngIf="!isLoggedIn" (click)="login()">Zaloguj się się!</button>
-        <div *ngIf="isLoggedIn">
-
-
-            <button><img class="img-responsive" src="assets/pirateBot.png" (click)="singleplayer()"></button>
-            <button><img class="img-responsive" src="assets/pirateMulti.png" (click)="multiplayer()"></button>
+            
         </div>
     </div>
-</body> -->
+</div>
