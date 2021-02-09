@@ -10,11 +10,17 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="isLoggedIn" class="nav-item">
           <a class="nav-link" href="singleplayer">Gra z botem</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="isLoggedIn" class="nav-item">
           <a class="nav-link" href="multiplayer">1 vs 1</a>
+        </li>
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link" href="login">Gra z botem</a>
+        </li>
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link" href="login">1 vs 1</a>
         </li>
       </ul>
       <ul *ngIf="isLoggedIn" class="navbar-nav mr-5">

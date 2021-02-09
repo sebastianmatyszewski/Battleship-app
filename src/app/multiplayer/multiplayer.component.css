@@ -8,18 +8,26 @@
   -moz-background-size: cover;  
   -o-background-size: cover;
   position: fixed;
-  background-image: url("/assets/mapa3.png");
-  /* -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px); */
-    
+  background-image: url("/assets/mapa_skarbow_brazowy.png");
 }
 .myModal {
   max-width: 600px;
   width: 600px;
+}
 
+
+.btn{
+  font-size: 20px;
+  font-family: 'Potta One', cursive;
+}
+.text-center{
+  font-size: 22px;
+  font-family: 'Potta One', cursive;
+}
+.modal-header{
+  font-weight: bold;
+  font-size: 22px;
+  font-family: 'Potta One', cursive;
 }
 h5 {
     font: 33px sans-serif;
@@ -69,13 +77,16 @@ h5  span {
 }
 
 
-.app-heading {
-    padding: 10px;
-    border-bottom: solid 0.5px rgb(206, 206, 206);
+h2 {
+  font-size: 50px;
+    /* padding: 10px;
+    border-bottom: solid 0.5px rgb(206, 206, 206); */
   }
   
   .player-heading{
-    border-bottom: 2px solid rgb(206, 206, 206);
+    font-family: 'Potta One', cursive;
+    font-size: 30px;
+    font-weight: bold;
     padding: 20px;
     width: 48%;
     margin: auto;
@@ -187,7 +198,7 @@ h5  span {
 {
    width: 40px;
   height: 40px;
-  border: solid 1px green;
+
   
 }
 .bt-cell
@@ -224,10 +235,6 @@ h5  span {
   /* width: 50%; */
   z-index:100;
   border:1px solid;
-  background-color: green;
-}
-.tutaj{
-  background-color: yellow;
 }
 
 .ship-box-set-vertically
@@ -237,7 +244,6 @@ h5  span {
   width: 40px;
   z-index:100;
   border:1px solid;
-  background-color: green;
   display: flex;
 }
 .ship-box-set
@@ -295,9 +301,7 @@ h5  span {
   display: flex;
 }
 
-.pokaz{
-  background-color: yellow;
-}
+
 /* Game started */
 .cell-size{
   width: 40px;
@@ -307,10 +311,12 @@ h5  span {
   height: 40px;
   border-style: solid;
   border-width: 1px;
+  background-color: rgba(0,0,0,0.2);
   /* background-color: tomato; */
 }
 
 .player-board-ship-true{
+  z-index: 100;
   background-color: rgb(145, 76, 64);
   border-style: solid;
   border-width: 1px;
@@ -325,12 +331,14 @@ h5  span {
   cursor: url(/assets/Bomb.cur),auto;
 }
 .computer-board-ship-hit{
+  z-index: 100;
   background-color: red;
   border-style: solid;
   border-width: 1px;
   
 }
 .computer-board-ship-miss{
+  z-index: 100;
   background-color: gray;
   border-style: solid;
   border-width: 1px;
@@ -345,7 +353,11 @@ h5  span {
 
 }
 
+
 .board-letters{
+  font-family: 'Potta One', cursive;
+  font-size: 20px;
+  font-weight: bold;
   width: 40px;
   height: 40px;
   min-width: 40px;
@@ -353,6 +365,9 @@ h5  span {
   box-sizing: border-box;
   text-align:center;
   padding-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgba(0,0,0,0.1) !important; */
 
 }
 .board-status{
@@ -367,12 +382,26 @@ h5  span {
 
 }
 
+.row{
+  
+  margin-right: 35px;
+  
+  
+}
+
 .board-numbers{
+  font-family: 'Potta One', cursive;
+  font-size: 20px;
+  font-weight: bold;
+
   width: 40px;
   height: 40px;
   min-width: 40px;
   max-width: 40px;
   box-sizing: border-box;
   text-align: center;
+  /* background-color: rgba(0,0,0,0.1) !important; */
+  justify-content: center;
+  align-items: center;
   /* padding-right: 20px; */
 }

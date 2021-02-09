@@ -34,20 +34,16 @@
         <ng-container *ngFor="let number of array(10), let i = index">
           <div class="row">
             <div class="col board-numbers">{{i+1}}</div>
-            <ng-container *ngFor="let number of array(10), let j = index">
-              <div class="col cell-size"
+            <ng-container class="coll" *ngFor="let number of array(10), let j = index">
+              <div class="col  cell-size "
               [class.player-board-ship-true] = "myBoard[i*10 + j].isShip === true"
               [class.player-board-ship-false] = "myBoard[i*10 + j].isShip === false"
               [class.computer-board-ship-hit] = "myBoard[i*10 + j].status == 1"
               [class.computer-board-ship-miss] = "myBoard[i*10 + j].status == 0"
-              > {{myBoard[i*10 + j].index}}</div>
+              > </div>
             </ng-container>
           </div>
         </ng-container>	
-        <div class="row">
-          
-          <div class="col board-status">{{computerHitStatus}}</div>
-        </div>
       </div>	
       <div class="col player-board">
         <div class="row">
@@ -65,23 +61,20 @@
         </div>
         <ng-container *ngFor="let number of array(10), let i = index">
           <div class="row">
-            <div class="col board-numbers">{{i+1}}</div>
-            <ng-container *ngFor="let number of array(10), let j = index">
-              <div class="col cell-size"
+            <div class=" board-numbers">{{i+1}}</div>
+            <ng-container class="coll" *ngFor="let number of array(10), let j = index">
+              <div class="col cell-size "
               
               [class.player-board-ship-false] = "enemyBoard[i*10 + j].isShip === false"
               [class.computer-board-ship-hit] = "enemyBoard[i*10 + j].status == 1"
               [class.computer-board-ship-miss] = "enemyBoard[i*10 + j].status == 0"
               [class.computer-board-ship-noaction]="enemyBoard[i*10 + j].status == 2"
               (click)="shot(enemyBoard[i*10+j])"
-              > {{enemyBoard[i*10 + j].index}}</div>
+              > </div>
             </ng-container>
           </div>
         </ng-container>	
-        <div class="row">
-          
-          <div class="col board-status">{{computerHitStatus}}</div>
-        </div>
+
       </div>	
   
     </div>
@@ -89,17 +82,17 @@
 </div>
 <ng-template #content>
   <div class="modal-header">
-    <span>Dostępne pokoje :{{totalRooms}}</span>
-    <button class="nav-link" (click)="goHome()">Powrót do strony głównej</button>
+    <span>Dostępne pokoje : 1</span>
+    <button class="btn btn-warning" (click)="goHome()">Powrót do strony głównej</button>
   </div>
   <div class="modal-body">
     <div class="container">
       <div class="join-game" [hidden]="roomNumber > 0 ? true :false">
         <div class="room-list">
-          <h6 class="text-center">Dostępne pokoje</h6>
+          <h6 class="text-center">Wybierz pokój</h6>
           <ul class="nav nav-pills">
             <li class="nav-item room-number" *ngFor="let number of emptyRooms">
-              <a class="nav-link active" title="Join room Number {{number}}" (click)="joinRoom(number)">#{{number}}</a>
+              <a class="nav-link active" title="Join room Number {{number-1}}" (click)="joinRoom(number)">#{{number-1}}</a>
             </li>
           </ul>
         </div>
@@ -114,11 +107,11 @@
       <div class="player-waitng" [hidden]="roomNumber > 0 ? false :true">
         <h2 class="text-center">Oczekiwanie na drugiego gracza</h2>
         <br />
-        <img class="game-loader" src="assets/img/loader.gif">
+        <img class="game-loader" src="assets/img/loader3.gif" width="150px" height="100px">
         <br />
         <br />
-        <h6 class="text-center">Utworzyłeś nowy pokój {{roomNumber}}
-          {{roomNumber}}</h6>
+        <h6 class="text-center">Utworzyłeś nowy pokój numer {{roomNumber -1}}
+         </h6>
       </div>
     </div>
   </div>

@@ -52,7 +52,6 @@
 					<ng-container *ngFor="let number of array(10), let j = index">
 						<div class="col cell-size" data-toggle="tooltip" data-placement="div"
 							title={{computerBoard[i*10+j].tooltip}}
-							[class.player-board-ship-true]="computerBoard[i*10 + j].isShip === true"
 							[class.computer-board-ship-hit]="computerBoard[i*10 + j].status == 1"
 							[class.computer-board-ship-miss]="computerBoard[i*10 + j].status == 0"
 							[class.computer-board-ship-noaction]="computerBoard[i*10 + j].status == 2"
@@ -96,11 +95,12 @@
 				<div class="grid" *ngFor="let number of array(100), let i = index" id='columns' #bt mat-button
 					class="bt-cell" (mouseover)="shipPositionOnArray = i"
 					(mouseover)="position=bt.getBoundingClientRect()"></div>
+					<button *ngIf="allShipPlaced" type="button" class="btn btn-success" (click)="startGame()">Rozpocznij
+						grę!</button>
+					<button *ngIf="!allShipPlaced" type="button" class="btn btn-secondary" disabled data-toggle="tooltip"
+						data-placement="bottom" title="Rozmieść wszystkie statki na planszy!"> Rozmieść statki! </button>
 			</div>
-			<button *ngIf="allShipPlaced" type="button" class="btn btn-success" (click)="startGame()">Rozpocznij
-				grę!</button>
-			<button *ngIf="!allShipPlaced" type="button" class="btn btn-secondary" disabled data-toggle="tooltip"
-				data-placement="bottom" title="Rozmieść wszystkie statki na planszy!"> Rozmieść statki! </button>
+			
 		</div>
 		<hr />
 		<!-- <div class="row"> -->
@@ -136,7 +136,6 @@
 											(mousedown)="shipId=ship.id" (mousedown)="shipPartId=i"
 											(mousedown)="ship.orientation=shipOrientation"
 											(mousedown)="ClickShipOrientation=ship.orientation"
-							
 											[class.ship-box-cell-set-horizontally]="ship.orientation === 'horizontally'"
 											[class.ship-box-cell-set-vertically]="ship.orientation === 'vertically'"
 											(mouseover)="index=i">

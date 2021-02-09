@@ -1,11 +1,17 @@
 <div class="bg-image"></div>
 
 <div>
-    <div *ngIf="isLoggedIn">
-        <p class="gameModeText h1" *ngIf="isLoggedIn">Ahoj {{user?.displayName}}!</p>
-        <p class="gameModeText h4" *ngIf="isLoggedIn">Wybierz tryb gry!</p>
-        <button class="button"><img class="img-responsive" src="assets/bot2.png" (click)="singleplayer()"></button>
-        <button class="button"><img class="img-responsive" src="assets/pirates.png" (click)="multiplayer()"></button>
+    <div class="container" *ngIf="isLoggedIn">
+        <div>
+            <p class="gameModeText h1" *ngIf="isLoggedIn">Ahoj {{user?.displayName}}!</p>
+            <p class="gameModeText h4" *ngIf="isLoggedIn">Wybierz tryb gry!</p>
+            <div>
+                <button class="button"><img class="img-responsive" src="assets/bot2.png" (click)="singleplayer()"></button>
+                <button class="button"><img class="img-responsive" src="assets/pirates.png" (click)="multiplayer()"></button>
+            </div>
+        </div>
+        
+        
     </div>
     <div class="container" *ngIf="!isLoggedIn">
         <div class="card" >

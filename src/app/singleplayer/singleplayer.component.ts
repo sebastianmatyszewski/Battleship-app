@@ -346,7 +346,7 @@ export class SingleplayerComponent implements OnInit {
           this.playerHitStatus = "PUDŁO"
         }
         if (this.shipsShotedByPlayer == this.shipsInBoard.length) {
-          alert(this.user = JSON.parse(localStorage.getItem("user")).displayName);
+          alert(JSON.parse(localStorage.getItem("user")).displayName + ", Udało Ci się pokonać Pirata Stefana!");
           this.resetGame();
         }
         this.delay(500).then(any => {
@@ -670,7 +670,7 @@ export class SingleplayerComponent implements OnInit {
 
     if (this.shipsShotedByComputer == this.shipsInBoard.length) {
       this.delay(500).then(any => {
-        alert("BOT wygrał");
+        alert("BOT zwyciężył, zagraj jeszcze raz!");
         this.gameIsPending = false;
         this.resetGame();
 

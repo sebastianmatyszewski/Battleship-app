@@ -13,9 +13,9 @@
 
 .board{
   position:fixed;
-  left:20%
+  left:20%;
+  top:50px;
 }
-
 
 .container1 {
   margin: 30px;
@@ -187,6 +187,7 @@
     height: 40px;
     border-style: solid;
     border-width: 1px;
+    background-color: rgba(0,0,0,0.2) !important;
     
   }
 
@@ -203,6 +204,7 @@
     box-sizing: border-box;
     height: 40px;
     border-style: solid;
+    background-color: rgba(0,0,0,0.2) ;
     border-width: 1px;
   }
 
@@ -226,13 +228,14 @@
     
   }
   .computer-board-ship-miss{
-    background-color: gray;
+    background-color: rgba(109, 107, 107, 0.9);
     border-style: solid;
     border-width: 1px;
   }
 
   .player-board{
     margin: 20px;
+    
   }
 
   .bot-board{
@@ -250,6 +253,8 @@
 
   }
   .board-status{
+    font-family: 'Potta One', cursive;
+    font-size: 30px;
     width: 400px;
     height: 40px;
     min-width: 400px;
