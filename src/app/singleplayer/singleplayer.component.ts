@@ -238,8 +238,6 @@ export class SingleplayerComponent implements OnInit {
     }
   }
 
-
-
   private drawBotShips() {
     for (let i = 0; i < 100; i++) {
       var test: shipArrayInterface = {
@@ -281,7 +279,6 @@ export class SingleplayerComponent implements OnInit {
         for (let i = 0; i < this.computerBoard.length; i++) {
           if (this.computerBoard[k].shipIndex == this.computerBoard[i].shipIndex) {
             this.computerBoard[k].positionOnBoard.push(this.computerBoard[i].index);
-            console.log(this.computerBoard[k].positionOnBoard)
           }
         }
       }
@@ -337,7 +334,6 @@ export class SingleplayerComponent implements OnInit {
           if (hitAndSink == this.computerBoard[shot.index].positionOnBoard.length) {
             this.playerHitStatus = "TRAFIONY ZATOPIONY"
             this.shipsShotedByPlayer = this.shipsShotedByPlayer + 1;
-            console.log('GRACZ' + this.shipsShotedByPlayer + '/' + this.shipsInBoard.length)
           } else {
             this.playerHitStatus = "TRAFIONY"
           }
@@ -452,7 +448,7 @@ export class SingleplayerComponent implements OnInit {
           } else {
             if (this.playerBoard[this.isShipShotedPosition - 10].status == 0) {
               this.shotShipPosition = 1
-              this.isShipShotedPosition = Math.max(...this.shotShipArray)  ///////////////////////////////////////////////
+              this.isShipShotedPosition = Math.max(...this.shotShipArray) 
               this.isShipShotedPositionCount.push(1)
               this.computerShot();
 
@@ -622,7 +618,6 @@ export class SingleplayerComponent implements OnInit {
           }
         }
       }
-
     } else {
       var shot = this.getRandomNumber();
       if (this.playerBoard[shot].status == 2) {

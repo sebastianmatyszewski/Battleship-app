@@ -1,5 +1,4 @@
 .bg-image {
-
   background-position: center;
   background-repeat: no-repeat;
   width:100%;  
@@ -14,7 +13,6 @@
   max-width: 600px;
   width: 600px;
 }
-
 
 .btn{
   font-size: 20px;
@@ -79,8 +77,6 @@ h5  span {
 
 h2 {
   font-size: 50px;
-    /* padding: 10px;
-    border-bottom: solid 0.5px rgb(206, 206, 206); */
   }
   
   .player-heading{
@@ -161,9 +157,6 @@ h2 {
     border-right:solid 10px rgba(21, 20, 20, 0.29);
   }
 
-
-/* fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff */
-
 .container1 {
   display: inline;
   justify-content: space-between;
@@ -181,10 +174,7 @@ h2 {
 {
   width:40px;
   height:40px;
-  /* border:1px solid; */
-  /* display:inline-block; */
   background-color:transparent;
-  
 }
 .ship-list, #board {
   width: auto;
@@ -192,14 +182,11 @@ h2 {
 .row1
 {
   display:inline-block;
-  
 }
 .cell
 {
    width: 40px;
   height: 40px;
-
-  
 }
 .bt-cell
 {
@@ -208,14 +195,11 @@ h2 {
 }
 .ship-box, .bt-cell{
   height: 40px;
-  /* border: solid 1px #ccc; */
-  /* color: rgba(0, 0, 0, 0.87); */
   cursor: move;
   justify-content: center;
   align-items: center;
   text-align: center;
   background: white;
-  /* border-radius: 4px; */
   position: relative;
   transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -225,14 +209,10 @@ h2 {
 .bt-cell:hover{
   background-color:red;
 }
-
-/* ewwwwwwwwwwwwwwwwwwwww */
-
 .ship-box-set-horizontally
 {
   position:relative;
   height: 40px;
-  /* width: 50%; */
   z-index:100;
   border:1px solid;
 }
@@ -255,28 +235,20 @@ h2 {
 }
 .ship-drop-wrapper-set-horizontally
 {
-  /* position:absolute; */
-  /* top:0; */
   height: 40px;
 }
 .ship-drop-wrapper-set-vertically
 {
-  /* position:absolute; */
-  /* top:0; */
   width: 40px;
 }
 .ship-box-cell-set
 {
-  /* width:30px;
-  height:39px; */
   width:40px;
   height:40px;
   border:1px solid;
   display:inline-block;
   background-color:transparent;
   background-color:brown;
-
-  
 }
 
 
@@ -285,7 +257,6 @@ h2 {
   height: 420px;
   display: flex;
   flex-wrap: wrap;
-  /* background-color: blue; */
   margin: 20px;
 }
 
@@ -301,8 +272,6 @@ h2 {
   display: flex;
 }
 
-
-/* Game started */
 .cell-size{
   width: 40px;
   min-width: 40px;
@@ -312,7 +281,6 @@ h2 {
   border-style: solid;
   border-width: 1px;
   background-color: rgba(0,0,0,0.2);
-  /* background-color: tomato; */
 }
 
 .player-board-ship-true{
@@ -322,7 +290,6 @@ h2 {
   border-width: 1px;
 }
 .player-board-ship-false{
-  /* background-color: white; */
   border-style: solid;
   border-width: 1px;
 }
@@ -350,9 +317,7 @@ h2 {
 
 .bot-board{
   margin: 20px;
-
 }
-
 
 .board-letters{
   font-family: 'Potta One', cursive;
@@ -367,9 +332,8 @@ h2 {
   padding-bottom: 20px;
   justify-content: center;
   align-items: center;
-  /* background-color: rgba(0,0,0,0.1) !important; */
-
 }
+
 .board-status{
   width: 400px;
   height: 40px;
@@ -378,30 +342,22 @@ h2 {
   box-sizing: border-box;
   text-align:center;
   left: 40px;
-
-
 }
 
 .row{
-  
   margin-right: 35px;
-  
-  
 }
 
 .board-numbers{
   font-family: 'Potta One', cursive;
   font-size: 20px;
   font-weight: bold;
-
   width: 40px;
   height: 40px;
   min-width: 40px;
   max-width: 40px;
   box-sizing: border-box;
   text-align: center;
-  /* background-color: rgba(0,0,0,0.1) !important; */
   justify-content: center;
   align-items: center;
-  /* padding-right: 20px; */
 }

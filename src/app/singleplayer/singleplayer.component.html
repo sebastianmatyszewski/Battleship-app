@@ -28,7 +28,6 @@
 				</div>
 			</ng-container>
 			<div class="row">
-
 				<div class="col board-status">{{computerHitStatus}}</div>
 			</div>
 		</div>
@@ -63,7 +62,6 @@
 				<div class="col board-status">{{playerHitStatus}}</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 
@@ -77,7 +75,6 @@
 					<div [class.ship-box-set-horizontally]="ship.orientation === 'horizontally'"
 						[class.ship-box-set-vertically]="ship.orientation === 'vertically'"
 						[style.left]="ship.orientation === 'horizontally' ? (1*ship.mastCount+'px') : 0">
-						
 						<div [class.ship-drop-wrapper-set-horizontally]="ship.orientation === 'horizontally'"
 							[class.ship-drop-wrapper-set-vertically]="ship.orientation === 'vertically'"
 							[style.width]="ship.orientation === 'horizontally' ? (40*size)+'px' : 40+'px'"
@@ -100,10 +97,8 @@
 					<button *ngIf="!allShipPlaced" type="button" class="btn btn-secondary" disabled data-toggle="tooltip"
 						data-placement="bottom" title="Rozmieść wszystkie statki na planszy!"> Rozmieść statki! </button>
 			</div>
-			
 		</div>
 		<hr />
-		<!-- <div class="row"> -->
 			<div class='container1'>
 				<div class="ships">
 					<h2 class="available-ships">Dostępne statki</h2>
@@ -112,7 +107,6 @@
 						#cdkShips=cdkDropList [cdkDropListData]="ships" class="ship-list"
 						[cdkDropListConnectedTo]="[cdkBoard]" (cdkDropListDropped)="drop($event)"
 						cdkDropListSortingDisabled="true"class="dziala">
-
 						<ng-container *ngFor="let ship of ships">
 							<div cdkDrag
 								[style.width]="ship.orientation === 'horizontally' ? (40*ship.mastCount)+(2*ship.mastCount+2)+'px' : 40+'px'"
@@ -120,18 +114,12 @@
 								[style.width]="ship.orientation  === 'vertically' ? 40+'px' : (40*ship.mastCount)+'px'"
 								[style.height]="ship.orientation === 'vertically' ? (40*ship.mastCount)+(2*ship.mastCount+2)+'px' : 40+'px'"
 								cdkDrag [style.size]="40*ship.mastCount+'px'"
-								
 								>
 								<div [class.ship-box-set-horizontally]="shipOrientation === 'horizontally'"
 									[class.ship-box-set-set-vertically]="shipOrientation === 'vertically'"
 									>
-									
-									
 									<div [class.ship-drop-wrapper-set-horizontally]="shipOrientation === 'horizontally'"
 										[class.ship-drop-wrapper-set-vertically]="shipOrientation === 'vertically'" >
-										
-										
-										
 										<div *ngFor="let i of [0,1,2,3,4].slice(0,ship.mastCount)"
 											(mousedown)="shipId=ship.id" (mousedown)="shipPartId=i"
 											(mousedown)="ship.orientation=shipOrientation"
@@ -139,16 +127,13 @@
 											[class.ship-box-cell-set-horizontally]="ship.orientation === 'horizontally'"
 											[class.ship-box-cell-set-vertically]="ship.orientation === 'vertically'"
 											(mouseover)="index=i">
-											<!-- {{ship.id}}a -->
 										</div>
 									</div>
 									<div *cdkDragPlaceholder></div>
 								</div>
 								<div *cdkDragPlaceholder></div>
 							</div>
-
 						</ng-container>
-
 					</div >
 					<div *ngIf="!allShipPlaced">
 						<button *ngIf="shipOrientation === 'vertically'" type="button" class="btn btn-success" (click)="changeOrientation()">Zmień na pionowe</button>
@@ -157,5 +142,4 @@
 					
 				</div>
 			</div>
-		<!-- </div> -->
 	</div>

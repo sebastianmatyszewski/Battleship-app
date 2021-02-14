@@ -12,30 +12,24 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-            <!-- <input type="text" class="form-control" placeholder="Adres email"> -->
             <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName" placeholder="Nazwa użytkownika">
-            <!-- <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Adres email"> -->
           </div>
           <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-            <!-- <input type="text" class="form-control" placeholder="Adres email"> -->
             <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Email">
-            <!-- <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Adres email"> -->
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-            <!-- <input type="password" class="form-control" placeholder="Hasło"> -->
             <input ngModel #password="ngModel" name="password" type="password" class="form-control" placeholder="Hasło">
           </div>
           <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-            <!-- <input type="password" class="form-control" placeholder="Hasło"> -->
             <input ngModel #password="ngModel" name="password" type="password" class="form-control" placeholder="Powtórz hasło">
 					</div>
 					<div class="form-group">
@@ -50,57 +44,7 @@
 				<div class="d-flex justify-content-center links">
 					Masz już konto?<a class="links-a" href="/login"><b>Zaloguj się</b></a>
 				</div>
-
 			</div>
 		</div>
 	</div>
 </div>
-<!-- <div class="row mt-4">
-    <div class="col-12">
-      <h4>User Registration</h4>
-    </div>
-    <div class="col-12">
-      <div class="row" *ngIf="authError">
-        <div class="col-12 alert alert-danger">
-          {{ authError?.message }}
-        </div>
-      </div>
-      <form #userRegForm="ngForm" (ngSubmit)="signup(userRegForm)">
-        <div class="row">
-          <div class="col-md-6 mb-2">
-            <label for="firstName">First name</label>
-            <input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control" id="firstName">
-          </div>
-          <div class="col-md-6 mb-2">
-            <label for="lastName">Last name</label>
-            <input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 mb-2">
-            <label for="email">Email</label>
-            <input ngModel #email="ngModel" name="email" type="email" class="form-control">
-          </div>
-        </div>
-        <div>
-          <div class="row">
-            <div class="col-md-12 mb-2">
-              <label for="password">Password</label>
-              <input ngModel #password="ngModel" name="password" type="password" class="form-control">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 mb-2">
-              <label>Confirm Password</label>
-              <input name="password" type="password" class="form-control">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>  
-  </div> -->

@@ -1,7 +1,3 @@
-/* 
-* @author Shashank Tiwari
-* Multiplayer Tic-Tac-Toe Game using Angular, Nodejs
-*/
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -90,8 +86,6 @@ export class AppService {
   private getRandomNumber(): number {
     return angularMath.getIntegerRandomRange(0, 99);
   }
-  
-  
   
   private generatePlayerBoard(){
     var player:  shipArrayInterface[] = [];

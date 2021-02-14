@@ -3,7 +3,6 @@ body, html {
   }
   
 .content{
-    /* background-color: blue; */
     padding: 5px;
     background-color: rgba(2, 0, 0, 0.616);
     filter: alpha(opacity=50);
@@ -18,14 +17,8 @@ body, html {
     background-size: cover;  
     -moz-background-size: cover;  
     -o-background-size: cover;
-    /* background-attachment: fixed; */
     position: fixed;
     background-image: url("/assets/mapa_skarbow_brazowy.png");
-    /* -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: blur(2px); */
       
   }
   .bg-text {

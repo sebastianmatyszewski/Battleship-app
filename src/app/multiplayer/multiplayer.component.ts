@@ -140,7 +140,6 @@ export class MultiplayerComponent {
 
   }
 
-
   private resetGame() {
     window.location.reload();
   }

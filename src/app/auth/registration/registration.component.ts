@@ -27,7 +27,6 @@ export class RegistrationComponent implements OnInit {
     else{
       this.isLoggedIn = false;
     }
-    
   }
   
   async signup(frm){

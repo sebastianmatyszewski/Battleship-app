@@ -1,5 +1,4 @@
 <div class="bg-image"></div>
-
 <div>
     <div class="container" *ngIf="isLoggedIn">
         <div>
@@ -10,8 +9,6 @@
                 <button class="button"><img class="img-responsive" src="assets/pirates.png" (click)="multiplayer()"></button>
             </div>
         </div>
-        
-        
     </div>
     <div class="container" *ngIf="!isLoggedIn">
         <div class="card" >
@@ -20,7 +17,6 @@
             Zmierz się z innymi graczami
             i pokaż innym
             <p>KTO TU RZĄDZI!</p>
-
                 <div>
                     <button type="button" class="btn btn-lg btn-warning" (click)="register()">Zarejestruj się już teraz!</button>
                 </div>
@@ -28,9 +24,6 @@
                 <div>
                     <button type="button" class="btn btn-lg btn-warning" (click)="login()">Zaloguj się do gry!</button>
                 </div>
-                
-
-            
         </div>
     </div>
 </div>
